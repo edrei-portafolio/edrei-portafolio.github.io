@@ -211,8 +211,8 @@ const SHARED = {
   uLoad: { value: 0 },
   uTime: { value: 0 },
   uContacts: { value: Array.from({ length: 6 }, () => new THREE.Vector3(99, 99, 0)) },
-  uBlueFill: { value: new THREE.Color(0x0c1424) },
-  uCyan: { value: new THREE.Color(0x6bd3ff) },
+  uBlueFill: { value: new THREE.Color(0x0b1628) },
+  uCyan: { value: new THREE.Color(0x4cdcf7) },
   uRevealY: { value: 99 },
   uScan: { value: 0 },
 };
@@ -456,7 +456,7 @@ function makeParticles(targets, pixelRatio) {
       uProgress: { value: 0 },
       uAlpha: { value: 1 },
       uSize: { value: 2.4 * pixelRatio },
-      uColor: { value: new THREE.Color(0x8fe0ff) },
+      uColor: { value: new THREE.Color(0x7ff0c4) },
     },
     vertexShader: /* glsl */ `
       attribute vec3 aStart; attribute float aDelay;
@@ -533,7 +533,7 @@ export function createGearScene(canvas, opts = {}) {
 
   const G = buildPlanetaryGeometries();
   const { zs, zp, zr, depth } = PLANET;
-  const edgeMat = new THREE.LineBasicMaterial({ color: 0x6bd3ff, transparent: true, opacity: 1, depthWrite: false, clippingPlanes: [REVEAL_PLANE] });
+  const edgeMat = new THREE.LineBasicMaterial({ color: 0x4cdcf7, transparent: true, opacity: 1, depthWrite: false, clippingPlanes: [REVEAL_PLANE] });
 
   const parts = [];
   const addPart = (geometry, material, z = 0, edges = true) => {
@@ -550,7 +550,7 @@ export function createGearScene(canvas, opts = {}) {
     return mesh;
   };
 
-  const sunMat = makeStateMaterial({ color: 0xff6a2a, metalness: 0.7, roughness: 0.3, teeth: zs, rootR: G.radii.sun.rf, boreR: 0.22 });
+  const sunMat = makeStateMaterial({ color: 0x14d98c, metalness: 0.55, roughness: 0.3, teeth: zs, rootR: G.radii.sun.rf, boreR: 0.22 });
   const planetMat = makeStateMaterial({ color: 0xdde2e8, metalness: 1, roughness: 0.15, teeth: zp, rootR: G.radii.planet.rf, boreR: 0.17 });
   const ringMat = makeStateMaterial({ color: 0x5f6772, metalness: 1, roughness: 0.42, teeth: zr, rootR: G.radii.ring.ra, boreR: 0.0, stressGain: 0.95 });
   const carrierMat = makeStateMaterial({ color: 0x5b636e, metalness: 1, roughness: 0.48, teeth: 3, rootR: 9, boreR: 0.32, stressGain: 0.6 });

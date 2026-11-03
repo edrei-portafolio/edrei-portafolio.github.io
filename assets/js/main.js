@@ -4,7 +4,7 @@ root.classList.add('js');
 if (!root.lang) root.lang = 'es';
 
 const CFG = Object.assign(
-  { marca: 'EJE Z', whatsapp: '', correo: '', ciudad: '', fundador: '', cargo: '', redes: {} },
+  { nombre: 'Edrei', marca: 'EJE Z', whatsapp: '', correo: '', ciudad: '', cargo: '', redes: {} },
   window.EJEZ_CONFIG || {}
 );
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -30,49 +30,49 @@ function applyConfig() {
     const a = $('a', li);
     if (url && a) a.href = url;
   });
+  $$('[data-socials]').forEach((ul) => { ul.hidden = !$$('[data-red]', ul).some((li) => !li.hidden); });
   if (waNumber) {
     $$('[data-wa-link]').forEach((a) => {
-      a.href = waUrl(`Hola, ${CFG.marca}. Quiero información sobre sus servicios.`);
+      a.href = waUrl(`Hola, ${CFG.nombre}. Quiero información sobre tus servicios.`);
       a.target = '_blank';
       a.rel = 'noopener';
     });
   }
 }
 
-/* ---------- Cabecera y menú móvil ---------- */
+/* ---------- Navegación en píldora + menú a pantalla completa ---------- */
 function initHeader() {
-  const header = $('.site-header');
-  const toggle = $('.menu-toggle');
-  const menu = $('#menu-movil');
+  const toggle = $('.pill-menu');
+  const menu = $('#menu');
+  const label = $('.pill-label', toggle);
   const setOpen = (open) => {
     toggle.setAttribute('aria-expanded', String(open));
     menu.hidden = !open;
-    $('.menu-toggle-label', toggle).textContent = open ? 'Cerrar' : 'Menú';
+    if (label) label.textContent = open ? 'Cerrar' : 'Menú';
     document.body.style.overflow = open ? 'hidden' : '';
+    if (open) $('a', menu)?.focus({ preventScroll: true });
   };
   toggle.addEventListener('click', () => setOpen(toggle.getAttribute('aria-expanded') !== 'true'));
   $$('a', menu).forEach((a) => a.addEventListener('click', () => setOpen(false)));
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') { setOpen(false); toggle.focus(); }
   });
-  matchMedia('(min-width: 1140px)').addEventListener('change', (e) => { if (e.matches) setOpen(false); });
-
-  // Enlace activo según la sección visible
-  const links = $$('.nav a');
-  const sections = links.map((a) => $(a.getAttribute('href'))).filter(Boolean);
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach((en) => {
-      if (!en.isIntersecting) return;
-      links.forEach((a) => a.setAttribute('aria-current', String(a.getAttribute('href') === '#' + en.target.id)));
-    });
-  }, { rootMargin: '-45% 0px -50% 0px' });
-  sections.forEach((s) => io.observe(s));
-  return header;
 }
 
 /* ---------- Revelado suave (parte de un estado visible) ---------- */
 function initReveal() {
+  // Títulos gigantes: cada letra entra desenfocada
+  $$('[data-letters]').forEach((el) => {
+    const txt = el.textContent.trim();
+    el.setAttribute('aria-label', txt);
+    el.innerHTML = [...txt].map((c, i) => (c === ' ' ? ' ' : `<span class="ch" aria-hidden="true" style="--i:${i}">${c}</span>`)).join('');
+  });
   if (reducedMotion || !('IntersectionObserver' in window)) return;
+  const megas = $$('[data-letters]');
+  const mo = new IntersectionObserver((entries) => {
+    entries.forEach((en) => { if (en.isIntersecting) { en.target.classList.remove('is-pending'); mo.unobserve(en.target); } });
+  }, { rootMargin: '0px 0px -12% 0px' });
+  megas.forEach((el) => { if (el.getBoundingClientRect().top > innerHeight * 0.9) { el.classList.add('is-pending'); mo.observe(el); } });
   const els = $$('.reveal');
   const vh = innerHeight;
   const io = new IntersectionObserver((entries) => {
@@ -94,28 +94,57 @@ function initReveal() {
   }
 }
 
-/* ---------- Manifiesto: palabras que se encienden con el scroll ---------- */
-function initManifesto() {
-  const el = $('[data-words]');
-  if (!el) return () => {};
-  const words = el.textContent.trim().split(/\s+/);
-  el.innerHTML = words
-    .map((w) => {
-      const cls = /pantalla/i.test(w) ? ' acc-c' : /verificado/i.test(w) ? ' acc-m' : '';
-      return `<span class="w${cls}">${w}</span>`;
-    })
-    .join(' ');
-  const spans = $$('.w', el);
-  if (reducedMotion) { spans.forEach((s) => s.classList.add('is-lit')); return () => {}; }
-  let last = -1;
+/* ---------- Declaración: las palabras pasan de borrosas a nítidas con el scroll ---------- */
+function initBlurText() {
+  const blocks = $$('[data-blur]').map((el) => {
+    const walk = (node) => {
+      [...node.childNodes].forEach((n) => {
+        if (n.nodeType === 3) {
+          const frag = document.createDocumentFragment();
+          n.textContent.split(/(\s+)/).forEach((part) => {
+            if (!part) return;
+            if (/^\s+$/.test(part)) frag.appendChild(document.createTextNode(part));
+            else { const sp = document.createElement('span'); sp.className = 'w'; sp.textContent = part; frag.appendChild(sp); }
+          });
+          n.replaceWith(frag);
+        } else if (n.nodeType === 1) walk(n);
+      });
+    };
+    walk(el);
+    return { el, words: $$('.w', el), last: -1 };
+  });
+  if (reducedMotion) return () => {};
   return () => {
-    const r = el.getBoundingClientRect();
     const vh = innerHeight;
-    const p = clamp((vh * 0.82 - r.top) / (r.height + vh * 0.25), 0, 1);
-    const n = Math.round(p * spans.length);
-    if (n === last) return;
-    last = n;
-    spans.forEach((s, i) => s.classList.toggle('is-lit', i < n));
+    blocks.forEach((b) => {
+      const r = b.el.getBoundingClientRect();
+      const p = clamp((vh * 0.88 - r.top) / (r.height + vh * 0.3), 0, 1);
+      const n = b.words.length;
+      const head = p * (n + 6);
+      const key = Math.round(head * 4);
+      if (key === b.last) return;
+      b.last = key;
+      b.words.forEach((w, i) => {
+        const d = clamp((i - head + 6) / 6, 0, 1);
+        w.style.filter = d > 0.02 ? `blur(${(d * 7).toFixed(1)}px)` : '';
+        w.style.opacity = (1 - d * 0.78).toFixed(2);
+      });
+    });
+  };
+}
+
+/* ---------- Parallax suave ---------- */
+function initParallax() {
+  const els = $$('[data-speed]');
+  if (reducedMotion || !els.length) return () => {};
+  return () => {
+    const vh = innerHeight;
+    els.forEach((el) => {
+      const r = el.parentElement.getBoundingClientRect();
+      if (r.bottom < -200 || r.top > vh + 200) return;
+      const off = (r.top + r.height / 2 - vh / 2) * +el.dataset.speed;
+      el.style.transform = `translate3d(0, ${off.toFixed(1)}px, 0)`;
+    });
   };
 }
 
@@ -126,7 +155,6 @@ function initPhrases() {
   const list = $$('.phrases .sr-only li').map((li) => li.textContent.trim());
   const idxEl = $('[data-phrase-index]');
   const bar = $('.phrase-bar i');
-  const glyphs = 'XYZ0123456789#/\\<>+=*';
   let i = 0;
   let timer = 0;
   let visible = false;
@@ -144,22 +172,8 @@ function initPhrases() {
 
   const scramble = (target) => {
     if (reducedMotion) { el.textContent = target; return; }
-    const start = performance.now();
-    const dur = 950;
-    const step = (now) => {
-      const t = clamp((now - start) / dur, 0, 1);
-      const reveal = Math.floor(t * target.length);
-      let out = '';
-      for (let k = 0; k < target.length; k++) {
-        const ch = target[k];
-        if (k < reveal || ch === ' ' || ch === '.' || ch === ',') out += ch;
-        else out += `<span class="sc">${glyphs[(Math.random() * glyphs.length) | 0]}</span>`;
-      }
-      el.innerHTML = out;
-      if (t < 1) requestAnimationFrame(step);
-      else el.textContent = target;
-    };
-    requestAnimationFrame(step);
+    el.classList.add('is-out');
+    setTimeout(() => { el.textContent = target; el.classList.remove('is-out'); }, 600);
   };
 
   const show = (k) => {
@@ -349,7 +363,7 @@ function initBrief() {
     medio: val('medio'),
   });
   const message = (d) => [
-    `Hola, ${CFG.marca}. Quiero cotizar un proyecto.`,
+    `Hola, ${CFG.nombre}. Quiero cotizar un proyecto.`,
     '',
     `• Nivel: ${d.nivel}`,
     `• Proyecto: ${d.tipo}`,
@@ -373,7 +387,7 @@ function initBrief() {
     out('nivel').textContent = d.nivel;
     out('plazo').textContent = d.plazo;
     out('partida').textContent = d.partida;
-    out('descripcion').textContent = d.descripcion || 'Cuéntanos qué necesitas y para qué lo usarás.';
+    out('descripcion').textContent = d.descripcion || 'Cuéntame qué necesitas y para qué lo usarás.';
     wa.href = waUrl(message(d));
   };
   form.addEventListener('input', (e) => { e.target.classList.remove('is-invalid'); render(); });
@@ -481,13 +495,17 @@ function initStage() {
   const stills = $$('.stage-inner .still');
   const readouts = $$('[data-readout]');
   const axes = $$('[data-axis]');
-  const header = $('.site-header');
+  const heroStep = $('[data-hero-step]');
+  const heroBar = $('.steps-bar b');
+  const storyNum = $('[data-story-num]');
+  const storyBar = $('[data-story-bar]');
   const progress = $('.progress span');
   const hudX = $('[data-hud="x"]');
   const hudY = $('[data-hud="y"]');
   const hudZ = $('[data-hud="z"]');
   const hud = $('.hud');
-  const updateManifesto = initManifesto();
+  const updateBlur = initBlurText();
+  const updateParallax = initParallax();
   const MM = 25.4 / 96; // milímetros por píxel CSS
   const fmt = (v) => v.toFixed(1).padStart(6, '0');
 
@@ -496,7 +514,11 @@ function initStage() {
   let firstFrame = false;
   let panelIdx = -1;
   let phase = 'hero';
-  const cycler = createHeroCycler((k) => { if (s3 && phase === 'hero') s3.setMode(k); });
+  const cycler = createHeroCycler((k) => {
+    if (s3 && phase === 'hero') s3.setMode(k);
+    if (heroStep) heroStep.textContent = '0' + (k + 1);
+    heroBar?.style.setProperty('--s', String((k + 1) / 3));
+  });
   cycler.start(0);
 
   const setPanel = (k) => {
@@ -506,6 +528,8 @@ function initStage() {
     stills.forEach((s, j) => s.classList.toggle('is-on', j === k));
     readouts.forEach((r) => r.classList.toggle('is-on', +r.dataset.readout === k));
     axes.forEach((a) => a.classList.toggle('is-on', +a.dataset.axis === k));
+    if (storyNum) storyNum.textContent = '0' + (k + 1);
+    storyBar?.style.setProperty('--s', String((k + 1) / 3));
   };
   setPanel(0);
 
@@ -513,7 +537,7 @@ function initStage() {
     if (!el) return { v: 0, r: null };
     const r = el.getBoundingClientRect();
     if (!r.height || !r.width) return { v: 0, r };
-    const top = Math.max(r.top, header.offsetHeight);
+    const top = Math.max(r.top, 0);
     const bottom = Math.min(r.bottom, innerHeight);
     return { v: clamp((bottom - top) / r.height, 0, 1), r };
   };
@@ -526,9 +550,9 @@ function initStage() {
     const y = scrollY;
     const docH = document.documentElement.scrollHeight - vh;
     write('p', (docH > 0 ? clamp(y / docH, 0, 1) : 0).toFixed(4), (v) => progress.style.setProperty('--p', v));
-    write('hdr', y > 8, (v) => header.classList.toggle('is-scrolled', v));
     if (hudZ) write('z', fmt(y * MM), (v) => { hudZ.textContent = v; });
-    updateManifesto();
+    updateBlur();
+    updateParallax();
 
     // Panel activo de servicios (el más cercano al centro de la pantalla)
     let best = 0, bestD = Infinity;

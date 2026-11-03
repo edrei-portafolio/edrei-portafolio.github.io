@@ -1,6 +1,8 @@
-# EJE Z · Sitio web
+# Edrei · Portafolio
 
-Sitio web de **EJE Z**, estudio de ingeniería 3D: diseño, simulación y fabricación.
+Portafolio de **Edrei**, diseñador mecatrónico freelance: diseño 3D, simulación y fabricación. Los proyectos se firman con la marca **EJE Z**.
+
+En línea: https://edrei-portafolio.github.io
 Es un sitio estático (HTML, CSS y JavaScript sin compilación), listo para publicarse gratis en GitHub Pages, Netlify o Cloudflare Pages, y para moverse después a tu propio dominio.
 
 ## Qué incluye
@@ -21,20 +23,20 @@ Es un sitio estático (HTML, CSS y JavaScript sin compilación), listo para publ
 Abre `assets/js/config.js` y cambia:
 
 ```js
-fundador: 'Tu Nombre',
+nombre: 'Edrei',
 whatsapp: '51987654321',          // código de país + número, solo dígitos
 correo: 'contacto@tudominio.com',
 ciudad: 'Lima, Perú',
 redes: { linkedin: '...', instagram: '...', tiktok: '...', youtube: '' },
 ```
 
-Con eso se actualizan solos el botón flotante de WhatsApp, el formulario de cotización, el pie de página y la sección "El estudio".
+Con eso se actualizan solos la portada, "Sobre mí", el botón flotante de WhatsApp, el formulario de cotización y el pie de página.
 
 Otros cambios frecuentes:
 
 - **Tu foto**: en `index.html` busca `portrait-frame` y reemplaza el contenido por `<img src="assets/img/tu-foto.webp" alt="Tu nombre">` (formato vertical 4:5).
 - **Textos**: todos están en `index.html`, en español y ordenados por sección.
-- **Compromisos** ("Respuesta en 24 h", "Cotización sin costo", "NDA"): ajústalos en la portada y en la sección "Por qué EJE Z" si no aplican a tu forma de trabajo.
+- **Compromisos** ("Respuesta en 24 h", "Cotización sin costo", "NDA"): ajústalos en la portada y en "Por qué trabajar conmigo" si no aplican a tu forma de trabajo.
 
 ## 2. Publica gratis en GitHub Pages (sin instalar nada)
 
@@ -78,5 +80,5 @@ Después, en `index.html`, cambia `og:image` por la dirección completa (`https:
 - Funciona sin servidor ni base de datos. El formulario arma una ficha y la envía por WhatsApp (o se copia para pegarla en un correo).
 - El modelo 3D se carga después del contenido. Si el equipo no soporta WebGL, la página muestra imágenes fijas de los mismos renders.
 - Respeta la opción del sistema "reducir movimiento": desactiva animaciones y deja el modelo quieto.
-- Tipografías de Google Fonts: Archivo y Martian Mono (licencia SIL Open Font). Modelo 3D con Three.js 0.160 (licencia MIT) desde jsDelivr.
+- Tipografías de Google Fonts: Instrument Serif, Work Sans y Martian Mono (licencia SIL Open Font). Modelo 3D con Three.js 0.160 (licencia MIT) desde jsDelivr.
 - Todas las imágenes 3D fueron generadas para esta marca; puedes usarlas libremente. Los valores técnicos del proyecto demo son ilustrativos.
