@@ -102,7 +102,7 @@ function initBlurText() {
 
 /* ---------- Comparador de tres estados (proyecto demo) ---------- */
 const CALLOUTS = {
-  design: [ { x: 18, y: 87, t: '140 × 90 × 12' }, { x: 24, y: 64, t: 'Ranura 11 × 22' }, { x: 25, y: 41, t: 'Nervio e = 10' } ],
+  design: [ { x: 19, y: 86, t: '140 × 90 × 12' }, { x: 22, y: 70, t: 'Ranura 11 × 22' }, { x: 24, y: 47, t: 'Nervio e = 10' } ],
   sim: [ { x: 49, y: 74, t: 'σ máx. 148 MPa' }, { x: 50, y: 27, t: 'FS mín. 2.6' } ],
   fab: [ { x: 85, y: 24, t: 'Al 6061-T6' }, { x: 86, y: 47, t: 'CNC 3 ejes' }, { x: 84, y: 88, t: 'Anodizado' } ],
 };
@@ -115,7 +115,12 @@ function initTriptych() {
   const apply = () => {
     box.style.setProperty('--a', pos[0] + '%');
     box.style.setProperty('--b', pos[1] + '%');
-    handles.forEach((h, k) => h.setAttribute('aria-valuenow', String(Math.round(pos[k]))));
+    handles.forEach((h, k) => {
+      h.setAttribute('aria-valuenow', String(Math.round(pos[k])));
+      h.setAttribute('aria-valuemin', String(k === 0 ? 3 : Math.round(pos[0] + MIN_GAP)));
+      h.setAttribute('aria-valuemax', String(k === 0 ? Math.round(pos[1] - MIN_GAP) : 97));
+      h.setAttribute('aria-valuetext', `${Math.round(pos[k])} %`);
+    });
   };
   const setPos = (k, v) => {
     if (k === 0) pos[0] = clamp(v, 3, pos[1] - MIN_GAP);
@@ -129,6 +134,8 @@ function initTriptych() {
     touched = true;
     const p = pct(e.clientX);
     const h = e.target.closest('.tp-handle');
+    // En pantallas táctiles solo se arrastra desde los divisores, para no interferir con el scroll
+    if (!h && e.pointerType !== 'mouse') return;
     active = h ? +h.dataset.handle : Math.abs(p - pos[0]) < Math.abs(p - pos[1]) ? 0 : 1;
     box.setPointerCapture(e.pointerId);
     setPos(active, p);
@@ -192,14 +199,14 @@ function initForm() {
   ].filter((l) => l !== null).join('\n');
   const render = () => { wa.href = waUrl(message()); };
   const say = (text, error = false) => { status.textContent = text; status.classList.toggle('is-error', error); };
-  form.addEventListener('input', (e) => { e.target.classList.remove('is-invalid'); render(); });
+  form.addEventListener('input', (e) => { e.target.classList.remove('is-invalid'); e.target.removeAttribute('aria-invalid'); render(); });
   form.addEventListener('change', render);
   form.addEventListener('submit', (e) => e.preventDefault());
   wa.addEventListener('click', (e) => {
     const missing = ['nombre', 'medio', 'descripcion'].filter((n) => !val(n));
     if (missing.length) {
       e.preventDefault();
-      missing.forEach((n) => form.elements[n].classList.add('is-invalid'));
+      missing.forEach((n) => { const el = form.elements[n]; el.classList.add('is-invalid'); el.setAttribute('aria-invalid', 'true'); el.setAttribute('aria-describedby', 'estado'); });
       say('Completa tu nombre, tu WhatsApp o correo y un breve mensaje.', true);
       form.elements[missing[0]].focus();
       return;
@@ -251,7 +258,7 @@ function initScroll() {
       const inside = r.top <= mid && r.bottom > mid;
       const a = idx.get(c.dataset.case);
       if (!a) return;
-      write('p' + c.id, p.toFixed(3), (v) => a.style.setProperty('--p', v));
+      write('p' + c.id, inside ? p.toFixed(3) : '0', (v) => a.style.setProperty('--p', v));
       write('a' + c.id, inside, (v) => a.classList.toggle('is-active', v));
     });
     // Pestaña activa
@@ -260,7 +267,7 @@ function initScroll() {
     write('tab', current, (v) => tabs.forEach((t) => t.classList.toggle('is-active', t.dataset.tab === v)));
     // El bloque de cotización se oculta en el contacto
     const cr = contact.getBoundingClientRect();
-    write('cta', cr.top < vh * 0.85, (v) => cta.classList.toggle('is-hidden', v));
+    write('cta', cr.top < vh * 0.85, (v) => { cta.classList.toggle('is-hidden', v); cta.toggleAttribute('inert', v); if (v) cta.setAttribute('tabindex', '-1'); else cta.removeAttribute('tabindex'); });
     // Giro del símbolo según el avance de la página
     const docH = document.documentElement.scrollHeight - vh;
     if (mark) mark.setProgress(docH > 0 ? scrollY / docH : 0);

@@ -5,7 +5,7 @@
 <title>Edrei · Diseño 3D, simulación y fabricación</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="Soy Edrei, diseñador mecatrónico freelance en Lima, Perú. Diseño en 3D, simulo y fabrico piezas, mecanismos y productos: del boceto a la pieza terminada.">
+<meta name="description" content="Soy Edrei, diseñador mecatrónico freelance en Lima, Perú. Diseño en 3D, simulo y fabrico (con equipo propio o talleres aliados) piezas, mecanismos y productos: del boceto a la pieza terminada.">
 <meta name="theme-color" content="#0D0F12">
 <link rel="icon" href="assets/brand/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="assets/brand/favicon-32.png" sizes="32x32" type="image/png">
@@ -134,14 +134,14 @@
     <!-- 02 · VALIDA -->
     <article class="case" id="valida" data-case="valida">
       <div class="case-head">
-        <p class="case-meta">Nivel Y<br>Diseño 3D + simulación<br>FEA · Mecanismos · Circuitos</p>
+        <p class="case-meta">Nivel Y<br>Diseño 3D + simulación<br>Elementos finitos · Mecanismos · Circuitos</p>
         <h2 class="case-title" data-letters>Valida</h2>
       </div>
       <div class="case-row">
         <div class="case-icons" aria-hidden="true"><svg><use href="#i-gauge"/></svg><svg><use href="#i-wave"/></svg><svg><use href="#i-circuit"/></svg></div>
         <div class="case-tile tile-y" aria-hidden="true"><span>Y</span></div>
         <div class="case-copy">
-          <p>Todo el Nivel X, más una prueba virtual. Someto tu diseño a cargas, presiones y movimientos reales para saber cómo se comportará antes de fabricarlo, y lo ajusto con datos hasta que cumple. <a href="#contacto" data-pick-level="Y">Cotizar este nivel.</a></p>
+          <p>Todo el Nivel X, más una prueba virtual. Someto tu diseño a las cargas, presiones y movimientos de su uso real para saber cómo se comportará antes de fabricarlo, y lo ajusto con datos hasta que cumple. <a href="#contacto" data-pick-level="Y">Cotizar este nivel.</a></p>
           <dl class="case-table">
             <div><dt>Análisis estructural</dt><dd>Esfuerzos, deformación y factor de seguridad</dd></div>
             <div><dt>Dinámica y térmica</dt><dd>Análisis modal y térmico</dd></div>
@@ -184,11 +184,13 @@
         <figure class="c3"><img src="assets/img/trama-eje.webp" width="900" height="720" loading="lazy" alt="Eje con engranaje en imagen tramada"></figure>
       </div>
 
-      <!-- Proyecto demo -->
-      <div class="demo" id="demo">
+    </article>
+    <!-- ============ PROYECTO DEMO ============ -->
+    <section class="demo" id="demo" aria-labelledby="demo-titulo">
         <div class="demo-head">
           <p class="case-meta">Proyecto demostrativo<br>Soporte de motor<br>Al 6061-T6</p>
-          <p class="demo-lead">Un mismo soporte recorrido por los tres niveles. Arrastra los divisores para comparar el modelo, la simulación y la pieza fabricada.</p>
+          <div><h2 class="demo-title" id="demo-titulo">Proyecto demo</h2>
+          <p class="demo-lead">Un mismo soporte recorrido por los tres niveles. Arrastra los divisores para comparar el modelo, la simulación y la pieza fabricada.</p></div>
         </div>
         <div class="triptych" data-triptych>
           <div class="tp-layer tp-design">
@@ -216,8 +218,7 @@
           <div><dt>Proceso</dt><dd>CNC 3 ejes + anodizado</dd></div>
         </dl>
         <p class="fineprint">Proyecto demostrativo con valores ilustrativos. Pronto, una selección de mis proyectos reales.</p>
-      </div>
-    </article>
+      </section>
   </section>
 
   <!-- ============ SOBRE MÍ ============ -->
@@ -227,7 +228,7 @@
 
     <div class="person">
       <p class="person-meta"><span data-cfg="nombre">Edrei</span><br><span data-cfg="cargo">Diseño mecatrónico · Freelance</span><br><a href="#" data-red-link="linkedin" hidden>LinkedIn</a></p>
-      <div class="person-photo" aria-hidden="true"><svg><use href="#i-z"/></svg><span>Tu foto</span></div>
+      <div class="person-photo" aria-hidden="true"><svg><use href="#i-z"/></svg></div>
       <div class="person-copy">
         <p>Vengo de la ingeniería mecatrónica y paso mis días entre modelos CAD, simulaciones y talleres. Trabajo con emprendedores y empresas que necesitan, en un solo lugar, el diseño, la validación y la fabricación de sus proyectos. Firmo mi trabajo como <strong>EJE Z</strong>: la tercera dimensión, la que convierte un dibujo plano en un objeto real.</p>
         <dl class="case-table">
@@ -256,7 +257,7 @@
     </div>
 
     <div class="person">
-      <p class="person-meta">Industrias<br>Dónde aplico</p>
+      <p class="person-meta">Industrias<br>Dónde lo aplico</p>
       <div class="person-photo person-icon" aria-hidden="true"><svg><use href="#i-layers"/></svg></div>
       <div class="person-copy">
         <p>Del repuesto que ya no se consigue al producto que quieres lanzar.</p>
@@ -291,8 +292,8 @@
         <div class="pick">
           <label><input type="radio" name="nivel" id="nivel-opt-x" value="X · Modela"><span>X · Modela</span></label>
           <label><input type="radio" name="nivel" id="nivel-opt-y" value="Y · Valida"><span>Y · Valida</span></label>
-          <label><input type="radio" name="nivel" id="nivel-opt-z" value="Z · Materializa" checked><span>Z · Materializa</span></label>
-          <label><input type="radio" name="nivel" id="nivel-opt-n" value="Por definir"><span>Aún no sé</span></label>
+          <label><input type="radio" name="nivel" id="nivel-opt-z" value="Z · Materializa"><span>Z · Materializa</span></label>
+          <label><input type="radio" name="nivel" id="nivel-opt-n" value="Por definir" checked><span>Aún no sé</span></label>
         </div>
       </fieldset>
       <div class="f">

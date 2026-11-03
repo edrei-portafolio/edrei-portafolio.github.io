@@ -68,7 +68,7 @@ export function createMark(canvas, { reduced = false } = {}) {
   resize();
   return {
     resize,
-    setProgress(p) { state.spinTarget = Math.sin(p * Math.PI * 3) * 0.55; },
+    setProgress(p) { state.spinTarget = Math.sin(p * Math.PI * 3) * 0.25; },
     start() { if (!state.running) { state.running = true; clock.getDelta(); state.raf = requestAnimationFrame(frame); } },
     stop() { state.running = false; cancelAnimationFrame(state.raf); },
     renderOnce() { frame(); },
