@@ -64,7 +64,8 @@ function initProgress() {
   onFrame((y, vh) => {
     const mid = y + vh * 0.5;
     cases.forEach((c) => {
-      const p = clamp((mid - c.top) / c.h, 0, 1).toFixed(3);
+      const inside = mid >= c.top && mid < c.top + c.h;
+      const p = inside ? clamp((mid - c.top) / c.h, 0, 1).toFixed(3) : '0';
       if (p !== c.p) { c.p = p; c.links.forEach((a) => a.style.setProperty('--p', p)); }
     });
   });

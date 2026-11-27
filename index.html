@@ -207,38 +207,51 @@
     <!-- BEGIN PKG-C -->
     <!-- ============ PROYECTO DEMO ============ -->
     <section class="demo" id="demo" aria-labelledby="demo-titulo" data-spy>
-        <div class="demo-head">
-          <p class="case-meta">Proyecto demostrativo<br>Soporte de motor<br>Al 6061-T6</p>
-          <div><h2 class="demo-title" id="demo-titulo">Proyecto demo</h2>
-          <p class="demo-lead">Un mismo soporte recorrido por los tres niveles. Arrastra los divisores para comparar el modelo, la simulación y la pieza fabricada.</p></div>
+      <div class="demo-head row12">
+        <div class="cota demo-cota" aria-hidden="true"><span>Demo</span></div>
+        <p class="case-meta demo-meta"><b>Proyecto demostrativo</b><br>Soporte de motor<br>Al 6061-T6</p>
+        <div class="demo-intro">
+          <h2 class="demo-title" id="demo-titulo">Un soporte, tres niveles</h2>
+          <p class="demo-lead">Un mismo soporte recorrido por los tres niveles. Arrastra los divisores para comparar el modelo, la simulación y la pieza fabricada.</p>
         </div>
-        <div class="triptych" data-triptych>
-          <div class="tp-layer tp-design">
-            <img src="assets/img/soporte-diseno.webp" width="1600" height="1000" loading="lazy" alt="Soporte de motor como modelo CAD">
-            <span class="tp-label">X · Modelo CAD</span>
-            <div class="callouts" data-callouts="design"></div>
-          </div>
-          <div class="tp-layer tp-sim">
-            <img src="assets/img/soporte-simulacion.webp" width="1600" height="1000" loading="lazy" alt="Soporte de motor con mapa de esfuerzos">
-            <span class="tp-label">Y · Simulación</span>
-            <div class="callouts" data-callouts="sim"></div>
-          </div>
-          <div class="tp-layer tp-fab">
-            <img src="assets/img/soporte-fabricado.webp" width="1600" height="1000" loading="lazy" alt="Soporte de motor fabricado en aluminio">
-            <span class="tp-label">Z · Fabricado</span>
-            <div class="callouts" data-callouts="fab"></div>
-          </div>
-          <button class="tp-handle" type="button" role="slider" aria-label="Divisor entre modelo y simulación" aria-valuemin="0" aria-valuemax="100" aria-valuenow="33" data-handle="0"><span></span></button>
-          <button class="tp-handle" type="button" role="slider" aria-label="Divisor entre simulación y pieza fabricada" aria-valuemin="0" aria-valuemax="100" aria-valuenow="67" data-handle="1"><span></span></button>
+      </div>
+      <div class="triptych" data-triptych data-widest="design">
+      <div class="tp-layer tp-design">
+        <div class="tp-frame">
+          <img src="assets/img/soporte-diseno.webp" srcset="assets/img/soporte-diseno-640.webp 640w, assets/img/soporte-diseno-1200.webp 1200w, assets/img/soporte-diseno.webp 1600w" sizes="(min-width:1024px) 70vw, 100vw" width="1600" height="1000" loading="lazy" decoding="async" alt="Soporte de motor como modelo CAD">
+          <div class="callouts" data-callouts="design"></div>
         </div>
+        <span class="tp-label">01 Modelo CAD</span>
+      </div>
+      <div class="tp-layer tp-sim">
+        <div class="tp-frame">
+          <img src="assets/img/soporte-simulacion-termico.webp" srcset="assets/img/soporte-simulacion-termico-640.webp 640w, assets/img/soporte-simulacion-termico-1200.webp 1200w, assets/img/soporte-simulacion-termico.webp 1600w" sizes="(min-width:1024px) 70vw, 100vw" width="1600" height="1000" loading="lazy" decoding="async" alt="Soporte de motor con mapa térmico de esfuerzos">
+          <div class="callouts" data-callouts="sim"></div>
+        </div>
+        <span class="tp-label">02 Simulación</span>
+        <p class="tp-scale" aria-hidden="true"><span>Esfuerzo · bajo → alto</span><i></i></p>
+      </div>
+      <div class="tp-layer tp-fab">
+        <div class="tp-frame">
+          <img src="assets/img/soporte-fabricado.webp" srcset="assets/img/soporte-fabricado-640.webp 640w, assets/img/soporte-fabricado-1200.webp 1200w, assets/img/soporte-fabricado.webp 1600w" sizes="(min-width:1024px) 70vw, 100vw" width="1600" height="1000" loading="lazy" decoding="async" alt="Soporte de motor fabricado en aluminio">
+          <div class="callouts" data-callouts="fab"></div>
+        </div>
+        <span class="tp-label">03 Pieza fabricada</span>
+      </div>
+        <button class="tp-handle" type="button" role="slider" aria-label="Divisor entre modelo y simulación" aria-valuemin="3" aria-valuemax="53" aria-valuenow="42" aria-valuetext="Modelo CAD 42 %, simulación 18 %" data-handle="0"><span></span></button>
+        <button class="tp-handle" type="button" role="slider" aria-label="Divisor entre simulación y pieza fabricada" aria-valuemin="49" aria-valuemax="97" aria-valuenow="60" aria-valuetext="Simulación 18 %, pieza fabricada 40 %" data-handle="1"><span></span></button>
+      </div>
+      <ol class="tp-legend" aria-hidden="true"><li><span class="num">01</span> Modelo</li><li><span class="num">02</span> Simulación</li><li><span class="num">03</span> Fabricada</li></ol>
+      <div class="row12 demo-foot">
         <dl class="case-table demo-table">
-          <div><dt>Carga de diseño</dt><dd>850 N</dd></div>
+          <div><dt>Carga de diseño</dt><dd>850&nbsp;N</dd></div>
           <div><dt>Factor de seguridad</dt><dd>2.6</dd></div>
-          <div><dt>Peso tras optimizar</dt><dd>−18 %</dd></div>
+          <div><dt>Peso tras optimizar</dt><dd>−18&nbsp;%</dd></div>
           <div><dt>Proceso</dt><dd>CNC 3 ejes + anodizado</dd></div>
         </dl>
-        <p class="fineprint">Proyecto demostrativo con valores ilustrativos. Pronto, una selección de mis proyectos reales.</p>
-      </section>
+        <p class="fineprint">Proyecto demostrativo con valores ilustrativos.</p>
+      </div>
+    </section>
     <!-- END PKG-C -->
   </section>
 
