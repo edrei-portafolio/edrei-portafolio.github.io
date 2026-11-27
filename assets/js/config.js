@@ -12,7 +12,9 @@ window.EJEZ_CONFIG = {
   marca: 'EJE Z',
 
   // WhatsApp con código de país, solo números. Ej.: '51987654321'
-  // Si lo dejas vacío, el botón abre WhatsApp para elegir el contacto.
+  // IMPORTANTE: complétalo antes de publicar. Mientras esté vacío, el formulario
+  // oculta "Enviar por WhatsApp" y deja "Copiar mensaje" como acción principal,
+  // y el pie no muestra el enlace de WhatsApp.
   whatsapp: '',
 
   // Correo de contacto. Ej.: 'hola@tudominio.com'
