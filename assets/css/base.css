@@ -22,8 +22,8 @@
   --f-display:"Archivo","Archivo Display Fallback",Arial,sans-serif;
   --f-body:"Archivo","Archivo Fallback","Helvetica Neue",Arial,sans-serif;
   --f-mono:"JetBrains Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
-  --t-xl:clamp(2.5rem,.875rem + 5.5vw,6.125rem);   /* títulos de nivel (Archivo 800 al 125%) */
-  --t-l:clamp(1.875rem,1.05rem + 2.75vw,3.75rem);  /* h1 y cada h2 de frase (Archivo 600 al 112%) */
+  --t-xl:clamp(2.52rem,.864rem + 5.472vw,6.12rem);  /* títulos de nivel (Archivo 800 al 125%); medidas exactas de la hoja G */
+  --t-l:clamp(1.875rem,1.05rem + 2.772vw,3.78rem);  /* h1 y cada h2 de frase (Archivo 600 al 112%); piso de 30 px: a 30,24 el primer renglón del titular queda a 2 px del borde a 390 px y el respaldo pasa a 7 renglones */
   --t-lead:1.125rem; --t-body:1rem; --t-small:.875rem; --t-label:.75rem; /* floor = 12px */
   /* space */
   --s-1:4px; --s-2:8px; --s-3:12px; --s-4:16px; --s-5:24px; --s-6:32px; --s-7:48px; --s-8:64px; --s-9:96px; --s-10:128px;
@@ -43,6 +43,7 @@
   color-scheme:dark;
 }
 @media (max-width:1023px){:root{--m:.6;--cta-h:56px}}
+@media (max-width:389px){:root{--t-l:1.71875rem}} /* bajo 390 px el titular conserva los 6 renglones equilibrados de la hoja G (a 30 px serían 7 sin equilibrar) */
 @media (min-width:1024px) and (max-width:1279px){:root{--cta-w:200px;--cta-h:72px}}
 
 /* ---- base ---- */
@@ -87,6 +88,7 @@ input:-webkit-autofill{-webkit-text-fill-color:var(--text);box-shadow:inset 0 0 
 .case-table>div{position:relative;display:grid;grid-template-columns:minmax(9rem,.8fr) minmax(0,1.2fr);gap:var(--gutter);align-items:baseline;padding:11px 0;border-bottom:1px solid var(--line)}
 .case-table dt{font:400 var(--t-label)/1.5 var(--f-mono);letter-spacing:.04em;text-transform:uppercase;color:var(--dim)}
 .case-table dd{font:400 var(--t-small)/1.45 var(--f-body);color:var(--text);font-variant-numeric:tabular-nums;text-wrap:pretty}
+.case-table dd .grp{display:inline-block} /* grupo que prefiere no partirse: si no cabe, la línea se corta entre grupos */
 @media (pointer:coarse){.case-table>div{padding:12px 0}}
 @media (max-width:379px){.case-table>div{grid-template-columns:1fr;gap:2px}}
 /* pills chain */

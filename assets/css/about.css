@@ -85,6 +85,7 @@
 
 .f label, .f legend { padding: 0; font: 400 var(--t-label)/1.5 var(--f-mono); letter-spacing: .04em; text-transform: uppercase; color: var(--text); transition: color var(--t-ui) ease; }
 .f legend { margin-bottom: 12px; }
+.f label .req { position: relative; top: -.12em; } /* el * de JetBrains Mono va a media altura: se sube a la altura de las mayúsculas */
 .f input, .f textarea {
   width: 100%; min-height: 48px; padding: 10px 0; margin: 0;
   font: 400 1.0625rem/1.45 var(--f-body); color: var(--text);
@@ -155,6 +156,8 @@
 .foot a { color: var(--mist); }
 .foot .link { display: inline-block; padding: 14px 0; color: var(--text); font-weight: 400; background-position: 0 calc(100% - 12px), 0 calc(100% - 12px); }
 .foot-b { display: flex; flex-wrap: wrap; gap: 4px 20px; }
+.foot-a .num { font-family: inherit; } /* el año con las cifras del texto: misma altura y mismo renglón */
+.foot .up { font-family: var(--f-mono); } /* la flecha de JetBrains Mono apoya en la línea base y tiene el trazo de las letras */
 .foot-b:empty { display: none; }
 @media (min-width: 640px) {
   .foot { grid-template-columns: repeat(12, minmax(0, 1fr)); }

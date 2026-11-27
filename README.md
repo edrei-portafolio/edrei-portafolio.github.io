@@ -82,5 +82,5 @@ Después, en `index.html`, cambia `og:image` por la dirección completa (`https:
 - Funciona sin servidor ni base de datos. El formulario arma una ficha y la envía por WhatsApp (o se copia para pegarla en un correo).
 - El modelo 3D se carga después del contenido. Si el equipo no soporta WebGL, la página muestra imágenes fijas de los mismos renders.
 - Respeta la opción del sistema "reducir movimiento": desactiva animaciones y deja el modelo quieto.
-- Tipografías de Google Fonts: Instrument Serif, Work Sans y Martian Mono (licencia SIL Open Font). Modelo 3D con Three.js 0.160 (licencia MIT) desde jsDelivr.
+- Tipografías de Google Fonts: Archivo y JetBrains Mono (licencia SIL Open Font). Modelo 3D con Three.js 0.160 (licencia MIT) desde jsDelivr.
 - Todas las imágenes 3D fueron generadas para esta marca; puedes usarlas libremente. Los valores técnicos del proyecto demo son ilustrativos.

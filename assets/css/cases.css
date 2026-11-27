@@ -5,6 +5,7 @@
 .case-head { display: grid; gap: var(--head-gap); padding-bottom: var(--s-6); border-bottom: 1px solid var(--line); }
 .case-head .cota { margin-bottom: calc(var(--s-5) - var(--head-gap)); }
 .case-title { overflow-wrap: anywhere; }
+@media (max-width: 299px) { .case-title { font-size: 13vw; } } /* pantallas de 280 px: «Materializa» entra en una línea */
 
 /* ---------- Fila: iconos, ficha, texto, tabla ---------- */
 .case-row { row-gap: 0; padding-top: var(--s-5); }

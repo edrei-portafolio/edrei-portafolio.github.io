@@ -53,7 +53,7 @@ html.motion .side-plan path { stroke-dasharray: 1 1; stroke-dashoffset: 1; anima
   transition: transform var(--t-ui) var(--ease-out), opacity var(--t-ui) ease, visibility 0s linear var(--t-ui);
 }
 .lvl-strip a {
-  position: relative; flex: 1 1 0; display: flex; align-items: center; gap: 6px; min-width: 0;
+  position: relative; flex: 1 1 0; display: flex; align-items: center; gap: 6px; min-width: max-content;
   font: 400 var(--t-label)/1 var(--f-mono); letter-spacing: .02em; text-transform: uppercase; color: var(--dim);
   text-decoration: none; white-space: nowrap; overflow: hidden;
 }
@@ -75,6 +75,7 @@ html[data-section="modela"] .lvl-strip, html[data-section="valida"] .lvl-strip, 
 }
 @media (pointer: coarse) { .tab { min-height: 44px; } }
 @media (max-width: 380px) { .tab { letter-spacing: .01em; padding: 0 4px; } }
+@media (max-width: 299px) { .tabs-bar { padding-left: max(8px, env(safe-area-inset-left, 0px)); padding-right: max(8px, env(safe-area-inset-right, 0px)); } .tab { letter-spacing: 0; padding: 0 2px; } } /* las cuatro pestañas caben a 280 px */
 
 /* ---------- Manifiesto ---------- */
 .content { position: relative; }

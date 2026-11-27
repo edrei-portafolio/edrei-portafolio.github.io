@@ -17,8 +17,8 @@
 @keyframes ez-sx { from { transform: scaleX(0); } }
 @keyframes ez-sy { from { transform: scaleY(0); } }
 @keyframes ez-pop { from { transform: scale(0); } }
-@keyframes ez-rise-112 { from { transform: translateY(112%); } }
-@keyframes ez-rise-108 { from { transform: translateY(108%); } }
+@keyframes ez-rise-wm { from { transform: translateY(calc(100% + .3em)); } }
+@keyframes ez-rise-tm { from { transform: translateY(calc(100% + .2em)); } }
 @keyframes ez-fill { from { clip-path: inset(100% 0 0 0); } to { clip-path: inset(0); } }
 @keyframes ez-wipe { from { clip-path: inset(0 0 100% 0); } to { clip-path: inset(0); } }
 @keyframes ez-settle { from { transform: scale(1.04); } }
@@ -28,8 +28,8 @@
 .wm { display: inline-block; overflow: hidden; vertical-align: top; padding: .1em .06em .18em; margin: -.1em -.06em -.18em; }
 .wm > span { display: inline-block; }
 html.motion .manifesto-text:not(.is-split) { opacity: 0; animation: ez-failsafe 0s 2.5s forwards; }
-html.motion .manifesto-text.is-split:not(.is-go) .wm > span { transform: translateY(112%); }
-html.motion .manifesto-text.is-go .wm > span { animation: ez-rise-112 var(--t-hero) var(--ease-expo) var(--d, 0ms) backwards; }
+html.motion .manifesto-text.is-split:not(.is-go) .wm > span { transform: translateY(calc(100% + .3em)); }
+html.motion .manifesto-text.is-go .wm > span { animation: ez-rise-wm var(--t-hero) var(--ease-expo) var(--d, 0ms) backwards; }
 /* La cota bajo "verificada" se dibuja tras la última línea */
 html.motion .manifesto-text:not(.is-go) .cota-word::after { transform: scaleX(0); }
 html.motion .manifesto-text.is-go:not(.is-done) .cota-word::after { animation: ez-sx 700ms var(--ease-out) var(--cd, 900ms) backwards; }
@@ -64,8 +64,8 @@ html.motion .cta-box { animation: ez-fill 700ms var(--ease-out) 600ms backwards;
 /* ---------- 5 · Capítulos: títulos con máscara ---------- */
 .tm { display: block; overflow: hidden; padding: .14em .04em .08em; margin: -.14em -.04em -.08em; }
 .tm > span { display: inline-block; }
-html.motion.mo-ready .rv:not(.is-in) .tm > span { transform: translateY(108%); }
-html.motion.mo-ready .rv.is-in .tm > span { animation: ez-rise-108 var(--t-hero) var(--ease-expo) backwards; }
+html.motion.mo-ready .rv:not(.is-in) .tm > span { transform: translateY(calc(100% + .2em)); }
+html.motion.mo-ready .rv.is-in .tm > span { animation: ez-rise-tm var(--t-hero) var(--ease-expo) backwards; }
 
 /* Cota, meta y regla inferior de la cabecera */
 html.motion.mo-ready .rv:not(.is-in) .cota::before,
@@ -126,8 +126,8 @@ html.motion.mo-ready .collage figure.is-in :is(img, canvas) { animation: ez-wipe
 }
 
 /* ---------- 8 · Sobre mí y contacto ---------- */
-html.motion.mo-ready .rv-h:not(.is-in) .wm > span { transform: translateY(112%); }
-html.motion.mo-ready .rv-h.is-in .wm > span { animation: ez-rise-112 900ms var(--ease-expo) var(--d, 0ms) backwards; }
+html.motion.mo-ready .rv-h:not(.is-in) .wm > span { transform: translateY(calc(100% + .3em)); }
+html.motion.mo-ready .rv-h.is-in .wm > span { animation: ez-rise-wm 900ms var(--ease-expo) var(--d, 0ms) backwards; }
 
 /* Riel de pasos: la regla se dibuja y luego aparecen los nodos */
 html.motion .steps li { border-top-color: transparent; }

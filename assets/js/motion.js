@@ -89,7 +89,11 @@ async function hero() {
   if (!h1) return;
   try {
     const f = document.fonts && document.fonts.load ? document.fonts.load('600 1em Archivo') : Promise.resolve();
-    await Promise.race([f.catch(() => {}), wait(600)]);
+    // Con el respaldo de métricas ajustadas (Arial o Liberation) el titular se parte igual con o sin Archivo:
+    // basta esperar 100 ms. Sin él (Android dibuja con Roboto) se espera hasta 600 ms, como antes.
+    let fb = false;
+    try { fb = ((await Promise.race([document.fonts.load('600 1em "Archivo Display Fallback"'), wait(100)])) || []).length > 0; } catch (e) { /* sin respaldo */ }
+    await Promise.race([f.catch(() => {}), wait(fb ? 100 : 600)]);
   } catch (e) { /* sigue */ }
   try {
     if (motionOn() && performance.now() < LATE_MS) {
