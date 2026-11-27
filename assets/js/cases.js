@@ -3,7 +3,8 @@
    si cambia el ancho (ResizeObserver, 150 ms de espera). Sin bucles. */
 import { $$, observeOnce } from './core.js';
 
-const SRC = 'assets/img/macro-fabricado-1200.webp'; // 1200 px bastan: cada punto mide 2 px CSS
+// Cada punto mide 2 px CSS: 1200 px de fuente sobran en escritorio y 640 en móvil (ya en caché por el img)
+const srcFor = (w) => `assets/img/macro-fabricado-${w / 2 > 300 ? 1200 : 640}.webp`;
 const INK = [13, 15, 18];       // #0d0f12
 const PAPER = [227, 233, 230];  // #e3e9e6 (--paper)
 const BG = 0.13; // el fondo del render (L ≈ .08–.10) queda como papel, no como mancha de tinta
@@ -71,7 +72,7 @@ function initDither(fig) {
       new ResizeObserver(() => { clearTimeout(timer); timer = setTimeout(draw, 150); }).observe(fig);
     }
   };
-  src.src = SRC;
+  src.src = srcFor(fig.clientWidth);
 }
 
 export function init() {

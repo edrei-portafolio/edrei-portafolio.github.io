@@ -72,6 +72,9 @@
 .pieza.cover .cap { color: var(--text); text-shadow: 0 1px 2px rgba(13, 15, 18, .8); }
 .cap-n { font-variant-numeric: tabular-nums; }
 @media (max-width: 759px) { .cap-t { display: none; } }
+/* 760–1279: en las figuras estrechas el título partiría en dos líneas sobre la imagen; queda solo el número */
+@media (min-width: 760px) and (max-width: 1279px) { .collage figure:not(.c1) .cap-t { display: none; } }
+.cap { max-width: calc(100% - 28px); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
 /* Trama en vivo (03): el img es el respaldo sin JS */
 .trama img { inset: 0; width: 100%; height: 100%; object-fit: cover; filter: grayscale(1); opacity: 1; }
