@@ -42,6 +42,7 @@
   color-scheme:dark;
 }
 @media (max-width:1023px){:root{--m:.6;--cta-h:56px}}
+@media (min-width:1024px) and (max-width:1279px){:root{--cta-w:200px;--cta-h:72px}}
 
 /* ---- base ---- */
 *,*::before,*::after{box-sizing:border-box}

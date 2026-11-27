@@ -141,9 +141,24 @@ function observeChapters({ heads, h2s, tbls }) {
   observeOnce(tbls, reveal, { rootMargin: RM });
   observeOnce($$('.steps, .ind, .person-tile'), reveal, { rootMargin: RM });
 
-  // Collages: por lote, de izquierda a derecha, tras decodificar
+  // Collages: por lote, de izquierda a derecha, tras cargar y decodificar
   const figs = $$('.collage figure');
   if (!('IntersectionObserver' in window)) { figs.forEach(reveal); return; }
+  // El recorte inicial (clip-path) impide que la carga diferida arranque sola:
+  // pedimos cada imagen con antelación, unos 1.5 altos de pantalla antes del revelado.
+  const pre = new IntersectionObserver((entries) => entries.forEach((e) => {
+    if (!e.isIntersecting) return;
+    pre.unobserve(e.target);
+    const im = e.target.querySelector('img');
+    if (im) im.loading = 'eager';
+  }), { rootMargin: '150% 0px' });
+  figs.forEach((f) => pre.observe(f));
+  const ready = (img) => {
+    if (!img) return Promise.resolve();
+    if (img.complete && img.naturalWidth) return img.decode ? img.decode().catch(() => {}) : Promise.resolve();
+    img.loading = 'eager';
+    return new Promise((r) => { img.addEventListener('load', r, { once: true }); img.addEventListener('error', r, { once: true }); });
+  };
   const io = new IntersectionObserver((entries) => {
     entries.filter((e) => e.isIntersecting)
       .sort((a, b) => a.boundingClientRect.left - b.boundingClientRect.left)
@@ -152,8 +167,7 @@ function observeChapters({ heads, h2s, tbls }) {
         io.unobserve(f);
         f.style.setProperty('--d', `${i * 90}ms`);
         const img = f.querySelector('img');
-        const dec = img && img.decode ? img.decode().catch(() => {}) : Promise.resolve();
-        Promise.race([dec, wait(700)]).then(() => reveal(f));
+        Promise.race([ready(img), wait(1200)]).then(() => reveal(f));
       });
   }, { rootMargin: RM });
   figs.forEach((f) => io.observe(f));

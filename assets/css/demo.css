@@ -80,7 +80,7 @@
 .callout-fab { color: var(--text); }
 
 /* Divisores */
-.tp-handle { position: absolute; z-index: 3; top: 0; bottom: 0; width: 44px; margin-left: -22px; padding: 0; background: none; border: 0; cursor: ew-resize; touch-action: none; }
+.tp-handle { position: absolute; z-index: 3; top: 0; bottom: 0; width: 44px; margin-left: -22px; padding: 0; background: none; border: 0; cursor: ew-resize; touch-action: pan-y; }
 .tp-handle[data-handle="0"] { left: var(--a); }
 .tp-handle[data-handle="1"] { left: var(--b); }
 .tp-handle::before { content: ""; position: absolute; left: 21.5px; top: 0; bottom: 0; width: 1px; background: var(--text); }

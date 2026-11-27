@@ -62,6 +62,7 @@
   .steps, .ind { grid-column: 3 / 13; grid-row: 2; }
 }
 @media (min-width: 760px) and (max-width: 1279px) { .person-p { grid-column: 5 / 13; } }
+@media (min-width: 900px) and (max-width: 1279px) { .steps { grid-column: 1 / 13; grid-template-columns: repeat(3, minmax(0, 1fr)); row-gap: var(--s-6); } }
 @media (max-width: 759px) {
   .person { gap: var(--s-5); grid-template-columns: 88px minmax(0, 1fr); }
   .person > * { grid-column: 1 / -1; }

@@ -73,6 +73,7 @@ html[data-section="modela"] .lvl-strip, html[data-section="valida"] .lvl-strip, 
   .tab { flex: 1 1 0; justify-content: center; min-height: 44px; padding: 0 6px; }
   .tabs-ink .tab { flex: 1 1 0; }
 }
+@media (pointer: coarse) { .tab { min-height: 44px; } }
 @media (max-width: 380px) { .tab { letter-spacing: .01em; padding: 0 4px; } }
 
 /* ---------- Manifiesto ---------- */
@@ -162,8 +163,8 @@ html[data-section="modela"] .lvl-strip, html[data-section="valida"] .lvl-strip, 
     justify-content: flex-end; background: none; border-bottom: 0; pointer-events: none;
   }
   .tabs-logo, .lvl-strip { display: none; }
-  .tabs { pointer-events: auto; box-shadow: 0 0 0 10px var(--ink); transition: background-color .4s ease, box-shadow .4s ease; }
-  html[data-section="sobre-mi"] .tabs { background: var(--night); box-shadow: 0 0 0 10px var(--night); }
+  .tabs { pointer-events: auto; transition: background-color .4s ease; }
+  html[data-section="sobre-mi"] .tabs { background: var(--night); }
 
   .content { margin-left: var(--side); }
   .manifesto { min-height: 100svh; display: grid; grid-template-rows: auto 1fr auto; padding-block: 24px; }
