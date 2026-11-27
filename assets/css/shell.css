@@ -150,7 +150,7 @@ html[data-section="modela"] .lvl-strip, html[data-section="valida"] .lvl-strip, 
   @media (hover: hover) and (pointer: fine) { .side-index a:hover { color: var(--text); } }
   .side-foot {
     display: block; position: absolute; left: 24px; right: 24px; bottom: calc(24px + env(safe-area-inset-bottom, 0px));
-    opacity: 0; transition: opacity var(--t-move) ease;
+    opacity: 0; transition: opacity var(--t-move) ease; pointer-events: none;
   }
   .side.is-compact .side-model { transform: translate3d(0, var(--dy-m, 0px), 0); }
   .side.is-compact .side-index { transform: translate3d(0, var(--dy-i, 0px), 0); }
