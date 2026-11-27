@@ -75,25 +75,28 @@
 <aside class="side" aria-label="Índice">
   <a class="side-logo" href="#manifiesto" aria-label="Edrei, ir al inicio"><svg aria-hidden="true"><use href="#logo-edrei"/></svg></a>
   <div class="side-model" aria-hidden="true">
+    <svg class="side-plan" viewBox="-63.8 -78 127.6 156" aria-hidden="true"><g transform="translate(-43 -50)"><path pathLength="1" style="--i:0" d="M9 0H86V22H0V9Z"/><path class="acc" pathLength="1" style="--i:1" d="M81.2 27L69.6 39H37.6L49.2 27Z"/><path class="acc" pathLength="1" style="--i:2" d="M64.8 44L53.2 56H21.2L32.8 44Z"/><path class="acc" pathLength="1" style="--i:3" d="M48.4 61L36.8 73H4.8L16.4 61Z"/><path pathLength="1" style="--i:4" d="M0 78H86V91L77 100H0Z"/></g></svg>
     <img class="side-still" src="assets/img/linea-z.webp" width="900" height="1100" alt="">
     <canvas id="marca3d"></canvas>
   </div>
   <nav class="side-index" aria-label="Servicios">
-    <a class="idx-head" href="#servicios"><svg class="ic"><use href="#i-tee"/></svg> Servicios</a>
-    <a class="idx" href="#modela" data-idx="modela"><span>01</span>Modela<i></i></a>
-    <a class="idx" href="#valida" data-idx="valida"><span>02</span>Valida<i></i></a>
-    <a class="idx" href="#materializa" data-idx="materializa"><span>03</span>Materializa<i></i></a>
+    <a class="idx-head" href="#servicios"><svg class="ic" aria-hidden="true"><use href="#i-tee"/></svg>Servicios</a>
+    <a class="idx" href="#modela" data-idx="modela"><span class="num">01</span>Modela<i></i></a>
+    <a class="idx" href="#valida" data-idx="valida"><span class="num">02</span>Valida<i></i></a>
+    <a class="idx" href="#materializa" data-idx="materializa"><span class="num">03</span>Materializa<i></i></a>
   </nav>
+  <p class="side-foot meta" aria-hidden="true"><span data-view>Vista · Alámbrica</span><br>Edrei · EJE Z · Lima</p>
 </aside>
 
 <!-- ============ PESTAÑAS ============ -->
 <header class="tabs-bar">
   <a class="tabs-logo" href="#manifiesto" aria-label="Edrei, ir al inicio"><svg aria-hidden="true"><use href="#logo-edrei"/></svg></a>
   <nav class="tabs" aria-label="Principal">
-    <a href="#servicios" data-tab="servicios">Servicios</a>
-    <a href="#demo" data-tab="demo" class="tab-demo">Proyecto</a>
-    <a href="#sobre-mi" data-tab="sobre-mi">Sobre mí</a>
-    <a href="#contacto" data-tab="contacto">Contacto</a>
+    <a class="tab" href="#servicios" data-tab="servicios">Servicios</a><a class="tab" href="#demo" data-tab="demo">Proyecto</a><a class="tab" href="#sobre-mi" data-tab="sobre-mi">Sobre mí</a><a class="tab" href="#contacto" data-tab="contacto">Contacto</a>
+    <span class="tabs-ink" aria-hidden="true"><span class="tab">Servicios</span><span class="tab">Proyecto</span><span class="tab">Sobre mí</span><span class="tab">Contacto</span></span>
+  </nav>
+  <nav class="lvl-strip" aria-label="Niveles">
+    <a href="#modela" data-lvl="modela"><span class="num">01</span> Modela</a><a href="#valida" data-lvl="valida"><span class="num">02</span> Valida</a><a href="#materializa" data-lvl="materializa"><span class="num">03</span> Materializa</a>
   </nav>
 </header>
 <!-- END PKG-A -->
@@ -103,8 +106,8 @@
   <!-- BEGIN PKG-A -->
   <!-- ============ MANIFIESTO ============ -->
   <section class="manifesto" id="manifiesto" data-spy>
-    <p class="label"><svg class="ic"><use href="#i-chip"/></svg> Manifiesto</p>
-    <h1 class="manifesto-text">Diseño, simulo y fabrico piezas, mecanismos y productos. Cada idea pasa primero por la pantalla, donde corregir no cuesta nada, y llega a tus manos <em>ya verificada.</em></h1>
+    <p class="label"><svg class="ic" aria-hidden="true"><use href="#i-chip"/></svg> Manifiesto</p>
+    <h1 class="manifesto-text">Diseño, simulo y fabrico piezas, mecanismos y productos. <span class="run">Cada idea se prueba primero en pantalla y llega a tus manos <span class="cota-word">verificada</span>.</span></h1>
     <div class="manifesto-foot">
       <p class="manifesto-who">Soy <span data-cfg="nombre">Edrei</span>, diseñador mecatrónico freelance en <span data-cfg="ciudad">Lima, Perú</span>. Trabajo contigo de forma directa, del boceto a la pieza terminada.</p>
       <ul class="chain" aria-label="Lo que hago">
@@ -336,7 +339,7 @@
 </main>
 
 <!-- BEGIN PKG-A -->
-<a class="cta-box" href="#contacto" data-cta><span>Cotiza tu proyecto</span><svg class="ic" aria-hidden="true"><use href="#i-corner"/></svg></a>
+<a class="cta-box btn-block" href="#contacto" data-cta><span>Cotiza tu proyecto</span><svg class="ic" aria-hidden="true"><use href="#i-corner"/></svg></a>
 <!-- END PKG-A -->
 
 <!-- BEGIN PKG-0 -->
