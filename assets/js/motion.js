@@ -88,7 +88,7 @@ async function hero() {
   const h1 = $('.manifesto-text');
   if (!h1) return;
   try {
-    const f = document.fonts && document.fonts.load ? document.fonts.load('580 1em "Science Gothic"') : Promise.resolve();
+    const f = document.fonts && document.fonts.load ? document.fonts.load('600 1em Archivo') : Promise.resolve();
     await Promise.race([f.catch(() => {}), wait(600)]);
   } catch (e) { /* sigue */ }
   try {

@@ -1,7 +1,7 @@
 /* ===== assets/css/base.css — owned by PKG-0. A–D consume and must not redefine these ===== */
-/* Respaldos con métricas de Arial ajustadas a Science Gothic (580, 106%) y Geist (400): evitan saltos al cargar */
-@font-face{font-family:"Science Gothic Fallback";src:local("Arial");size-adjust:125.6%;ascent-override:86.8%;descent-override:31.1%;line-gap-override:0%}
-@font-face{font-family:"Geist Fallback";src:local("Arial");size-adjust:101.5%;ascent-override:99.5%;descent-override:29.6%;line-gap-override:0%}
+/* Respaldos con métricas ajustadas a Archivo: títulos (600 al 112%) sobre Arial Bold y texto (400) sobre Arial. Evitan saltos mientras carga la fuente */
+@font-face{font-family:"Archivo Display Fallback";src:local("Arial Bold"),local("Arial-BoldMT"),local("Liberation Sans Bold"),local("LiberationSans-Bold");font-weight:100 900;size-adjust:108%;ascent-override:81.5%;descent-override:19.4%;line-gap-override:0%}
+@font-face{font-family:"Archivo Fallback";src:local("Arial"),local("ArialMT"),local("Liberation Sans"),local("LiberationSans");size-adjust:98.3%;ascent-override:89.5%;descent-override:21.4%;line-gap-override:0%}
 :root{
   /* palette (owner) */
   --ink:#0d0f12; --ink-2:#12151a; --slate:#171c24; --slate-2:#1d232d;
@@ -19,11 +19,11 @@
   --th-0:#1d3a5a; --th-1:#2b6f92; --th-2:#4cdcf7; --th-3:#dff7f9; --th-4:#ff7a3d;
   --th-ramp:linear-gradient(90deg,var(--th-0),var(--th-1) 30%,var(--th-2) 60%,var(--th-3) 82%,var(--th-4));
   /* type */
-  --f-display:"Science Gothic","Science Gothic Fallback",Arial,sans-serif;
-  --f-body:"Geist","Geist Fallback","Helvetica Neue",Arial,sans-serif;
-  --f-mono:"Geist Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
-  --t-xl:clamp(2.5rem,.6rem + 6.4vw,6.5rem);     /* case titles (Science Gothic ancha) */
-  --t-l:clamp(2rem,1.1rem + 2.9vw,4rem);         /* h1 + every statement h2 */
+  --f-display:"Archivo","Archivo Display Fallback",Arial,sans-serif;
+  --f-body:"Archivo","Archivo Fallback","Helvetica Neue",Arial,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+  --t-xl:clamp(2.5rem,.875rem + 5.5vw,6.125rem);   /* títulos de nivel (Archivo 800 al 125%) */
+  --t-l:clamp(1.875rem,1.05rem + 2.75vw,3.75rem);  /* h1 y cada h2 de frase (Archivo 600 al 112%) */
   --t-lead:1.125rem; --t-body:1rem; --t-small:.875rem; --t-label:.75rem; /* floor = 12px */
   /* space */
   --s-1:4px; --s-2:8px; --s-3:12px; --s-4:16px; --s-5:24px; --s-6:32px; --s-7:48px; --s-8:64px; --s-9:96px; --s-10:128px;
@@ -70,11 +70,9 @@ input:-webkit-autofill{-webkit-text-fill-color:var(--text);box-shadow:inset 0 0 
 @media (min-width:760px){.row12{grid-template-columns:repeat(12,minmax(0,1fr))}}
 
 /* ---- type roles (applied by selector so A–D need no class edits) ---- */
-/* Science Gothic: títulos de nivel anchos como un rótulo de plano; frases a ancho moderado para leerse bien */
-.display-xl,.case-title{font:720 var(--t-xl)/.92 var(--f-display);font-stretch:140%;letter-spacing:-.02em}
-.display-l,.manifesto-text,.team-title,.contact-title,.demo-title{font:580 var(--t-l)/1.06 var(--f-display);font-stretch:106%;letter-spacing:-.012em;max-width:20ch}
-@media (max-width:1279px){.display-xl,.case-title{font-stretch:125%}}
-@media (max-width:759px){.display-xl,.case-title{font-stretch:112%}.display-l,.manifesto-text,.team-title,.contact-title,.demo-title{font-stretch:100%;line-height:1.1}}
+/* Archivo expandida: títulos de nivel en 800 al 125% de ancho, como un rótulo de plano; frases en 600 al 112% */
+.display-xl,.case-title{font:800 var(--t-xl)/.88 var(--f-display);font-stretch:125%;letter-spacing:-.03em}
+.display-l,.manifesto-text,.team-title,.contact-title,.demo-title{font:600 var(--t-l)/1.02 var(--f-display);font-stretch:112%;letter-spacing:-.025em;max-width:20ch}
 .run{color:var(--dim)}
 .prose,.case-copy>p,.person-copy>p,.demo-lead,.manifesto-who{font:400 var(--t-body)/1.6 var(--f-body);color:var(--mist);max-width:36rem;text-wrap:pretty}
 .label{display:inline-flex;align-items:center;gap:10px;font:400 var(--t-label)/1.5 var(--f-mono);letter-spacing:.04em;text-transform:uppercase;color:var(--text)}
