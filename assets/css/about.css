@@ -162,3 +162,8 @@
   .foot-c { grid-column: 9 / 13; justify-self: end; }
 }
 @media (max-width: 1023px) { .contact { padding-bottom: calc(96px + env(safe-area-inset-bottom, 0px)); } }
+
+/* Valores de la tabla de herramientas en la columna 5, como el texto */
+@media (min-width: 1400px) {
+  .person-table > div { grid-template-columns: calc((100% - 9 * var(--gutter)) / 5 + var(--gutter)) minmax(0, 1fr); }
+}

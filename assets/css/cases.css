@@ -113,3 +113,8 @@
   .collage-c .c1 { grid-column: 1 / -1; aspect-ratio: 2400 / 1100; }
   .collage-b .th-legend { grid-column: 1 / -1; margin-top: 4px; }
 }
+
+/* Los valores de la tabla arrancan en la columna 5, la misma línea que el texto */
+@media (min-width: 1400px) {
+  .case-row .case-table > div { grid-template-columns: calc((100% - 9 * var(--gutter)) / 5 + var(--gutter)) minmax(0, 1fr); }
+}
