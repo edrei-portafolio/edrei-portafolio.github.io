@@ -1,1 +1,156 @@
-/* Movimiento (stub) */
+/* =========================================================
+   Movimiento (PKG-M)
+   - Todo pre-estado vive bajo html.motion (lo pone el script del <head>).
+   - Carga (manifiesto): animaciones CSS con keyframes solo "from" y
+     fill-mode backwards: al terminar, cada elemento vuelve a su estado
+     estático exacto. No necesitan JS para completarse.
+   - Capítulos: el pre-estado exige además html.mo-ready, que motion.js
+     pone al arrancar; sin JS (o si main.js falla) no hay pre-estado y
+     todo se ve. Cada revelado se dispara una vez con .is-in.
+   - Solo transform, opacity y clip-path. Sin blur, sin bucles.
+   ========================================================= */
+
+@keyframes ez-failsafe { to { opacity: 1; transform: none; clip-path: inset(0); } }
+@keyframes ez-fade { from { opacity: 0; } }
+@keyframes ez-up { from { opacity: 0; transform: translateY(calc(12px * var(--m))); } }
+@keyframes ez-up8 { from { opacity: 0; transform: translateY(calc(8px * var(--m))); } }
+@keyframes ez-sx { from { transform: scaleX(0); } }
+@keyframes ez-sy { from { transform: scaleY(0); } }
+@keyframes ez-pop { from { transform: scale(0); } }
+@keyframes ez-rise-112 { from { transform: translateY(112%); } }
+@keyframes ez-rise-108 { from { transform: translateY(108%); } }
+@keyframes ez-fill { from { clip-path: inset(100% 0 0 0); } to { clip-path: inset(0); } }
+@keyframes ez-wipe { from { clip-path: inset(0 0 100% 0); } to { clip-path: inset(0); } }
+@keyframes ez-settle { from { transform: scale(1.04); } }
+@keyframes ez-draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+
+/* ---------- 1 · Titular del manifiesto: máscaras por línea ---------- */
+.wm { display: inline-block; overflow: hidden; vertical-align: top; padding: .1em .06em .18em; margin: -.1em -.06em -.18em; }
+.wm > span { display: inline-block; }
+html.motion .manifesto-text:not(.is-split) { opacity: 0; animation: ez-failsafe 0s 2.5s forwards; }
+html.motion .manifesto-text.is-split:not(.is-go) .wm > span { transform: translateY(112%); }
+html.motion .manifesto-text.is-go .wm > span { animation: ez-rise-112 var(--t-hero) var(--ease-expo) var(--d, 0ms) backwards; }
+/* La cota bajo "verificada" se dibuja tras la última línea */
+html.motion .manifesto-text:not(.is-go) .cota-word::after { transform: scaleX(0); }
+html.motion .manifesto-text.is-go .cota-word::after { animation: ez-sx 700ms var(--ease-out) var(--cd, 900ms) backwards; }
+
+/* ---------- 2 · Resto del manifiesto ---------- */
+html.motion .manifesto .label { animation: ez-fade 500ms ease 80ms backwards; }
+html.motion .manifesto-who { animation: ez-up 800ms var(--ease-out) 560ms backwards; }
+html.motion .manifesto .chain li { animation: ez-up8 600ms var(--ease-out) 640ms backwards; }
+html.motion .manifesto .chain li:nth-child(2) { animation-delay: 700ms; }
+html.motion .manifesto .chain li:nth-child(3) { animation-delay: 760ms; }
+html.motion .manifesto .chain li + li::before { animation: ez-sx 500ms var(--ease-out) 700ms backwards; }
+html.motion .manifesto .chain li:nth-child(3)::before { animation-delay: 760ms; }
+
+/* ---------- 3 · Bloque CTA: se llena hacia arriba ---------- */
+html.motion .cta-box { animation: ez-fill 700ms var(--ease-out) 600ms backwards; }
+
+/* ---------- 4 · Índice lateral: reglas y etiquetas ---------- */
+@media (min-width: 1024px) {
+  html.motion .side-index a { border-bottom-color: transparent; }
+  html.motion .side-index a::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 1px; background: var(--line-2); transform-origin: 0 50%; pointer-events: none; animation: ez-sx 600ms var(--ease-out) 300ms backwards; }
+  html.motion .side-index a:nth-child(2)::after { animation-delay: 350ms; }
+  html.motion .side-index a:nth-child(3)::after { animation-delay: 400ms; }
+  html.motion .side-index a:nth-child(4)::after { animation-delay: 450ms; }
+  html.motion .side-index a { animation: ez-fade 400ms ease 340ms backwards; }
+  html.motion .side-index a:nth-child(2) { animation-delay: 390ms; }
+  html.motion .side-index a:nth-child(3) { animation-delay: 440ms; }
+  html.motion .side-index a:nth-child(4) { animation-delay: 490ms; }
+  /* Testigo: la línea de progreso que termina sale hacia la derecha */
+  html.motion .side-index .idx:not([aria-current]) i { transform: scaleX(0) !important; transform-origin: 100% 50%; transition: transform 450ms var(--ease-out); }
+}
+
+/* ---------- 5 · Capítulos: títulos con máscara ---------- */
+.tm { display: block; overflow: hidden; padding: .14em .04em .08em; margin: -.14em -.04em -.08em; }
+.tm > span { display: inline-block; }
+html.motion.mo-ready .rv:not(.is-in) .tm > span { transform: translateY(108%); }
+html.motion.mo-ready .rv.is-in .tm > span { animation: ez-rise-108 var(--t-hero) var(--ease-expo) backwards; }
+
+/* Cota, meta y regla inferior de la cabecera */
+html.motion.mo-ready .rv:not(.is-in) .cota::before,
+html.motion.mo-ready .case-head:not(.is-in)::after { transform: scaleX(0); }
+html.motion.mo-ready .rv:not(.is-in) .cota > span,
+html.motion.mo-ready .rv:not(.is-in) .case-meta { opacity: 0; }
+html.motion.mo-ready .rv.is-in .cota::before { animation: ez-sx 1100ms var(--ease-out) 100ms backwards; }
+html.motion.mo-ready .rv.is-in .cota > span { animation: ez-fade 500ms ease 500ms backwards; }
+html.motion.mo-ready .rv.is-in .case-meta { animation: ez-fade 500ms ease 150ms backwards; }
+html.motion .case-head { border-bottom-color: transparent; position: relative; }
+html.motion .case-head::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 1px; background: var(--line); transform-origin: 0 50%; pointer-events: none; }
+html.motion.mo-ready .case-head.is-in::after { animation: ez-sx 1100ms var(--ease-out) 200ms backwards; }
+
+/* ---------- 6 · Fila del caso: tile, iconos, texto, tabla ---------- */
+html.motion.mo-ready .case-row:not(.is-in) :is(.ax-off, .ax-plane, .ax-cube, .ax-t),
+html.motion.mo-ready .case-row:not(.is-in) .case-icons svg,
+html.motion.mo-ready .case-row:not(.is-in) .case-copy-p { opacity: 0; }
+html.motion.mo-ready .case-row:not(.is-in) :is(.ax-now, .ax-on) { stroke-dasharray: 1; stroke-dashoffset: 1; }
+html.motion.mo-ready .case-row:not(.is-in) .ax-dot { transform: scale(0); }
+html.motion.mo-ready .case-row.is-in :is(.ax-now, .ax-on) { stroke-dasharray: 1; animation: ez-draw 600ms var(--ease-in-out) 80ms backwards; }
+html.motion.mo-ready .case-row.is-in .ax-now { animation-delay: 320ms; }
+html.motion.mo-ready .case-row.is-in .ax-off,
+html.motion.mo-ready .case-row.is-in .ax-t { animation: ez-fade 400ms ease backwards; }
+html.motion.mo-ready .case-row.is-in :is(.ax-plane, .ax-cube) { animation: ez-fade 500ms ease 500ms backwards; }
+html.motion.mo-ready .case-row.is-in .ax-dot { transform-box: fill-box; transform-origin: 50% 50%; animation: ez-pop 200ms var(--ease-out) 900ms backwards; }
+html.motion.mo-ready .case-row.is-in .case-icons svg { animation: ez-fade 400ms ease 80ms backwards; }
+html.motion.mo-ready .case-row.is-in .case-icons svg:nth-child(2) { animation-delay: 130ms; }
+html.motion.mo-ready .case-row.is-in .case-icons svg:nth-child(3) { animation-delay: 170ms; }
+html.motion.mo-ready .case-row.is-in .case-copy-p { animation: ez-up 700ms var(--ease-out) 120ms backwards; }
+
+/* Tablas (casos, demo, sobre mí): la línea de cada fila pasa a ::after */
+html.motion .case-table > div { border-bottom-color: transparent; }
+html.motion .case-table > div::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 1px; background: var(--line); transform-origin: 0 50%; pointer-events: none; }
+html.motion.mo-ready .tbl:not(.is-in) .case-table > div::after,
+html.motion.mo-ready .case-table.tbl:not(.is-in) > div::after { transform: scaleX(0); }
+html.motion.mo-ready .tbl:not(.is-in) .case-table > div > *,
+html.motion.mo-ready .case-table.tbl:not(.is-in) > div > * { opacity: 0; }
+html.motion.mo-ready .tbl.is-in .case-table > div::after,
+html.motion.mo-ready .case-table.tbl.is-in > div::after { animation: ez-sx 700ms var(--ease-out) var(--d, 160ms) backwards; }
+html.motion.mo-ready .tbl.is-in .case-table > div > *,
+html.motion.mo-ready .case-table.tbl.is-in > div > * { animation: ez-fade 400ms ease calc(var(--d, 160ms) + 80ms) backwards; }
+.case-table > div:nth-child(1) { --d: 160ms; }
+.case-table > div:nth-child(2) { --d: 200ms; }
+.case-table > div:nth-child(3) { --d: 245ms; }
+.case-table > div:nth-child(4) { --d: 285ms; }
+.case-table > div:nth-child(5) { --d: 320ms; }
+.case-table > div:nth-child(6) { --d: 350ms; }
+.case-table > div:nth-child(n+7) { --d: 375ms; }
+
+/* ---------- 7 · Collages: cortina tras decodificar ---------- */
+html.motion.mo-ready .collage figure:not(.is-in) :is(img, canvas) { clip-path: inset(0 0 100% 0); }
+html.motion.mo-ready .collage figure.is-in :is(img, canvas) { animation: ez-wipe var(--t-reveal) var(--ease-in-out) var(--d, 0ms) backwards; }
+@media (min-width: 1024px) {
+  html.motion.mo-ready .collage figure.pieza.is-in img { animation: ez-wipe var(--t-reveal) var(--ease-in-out) var(--d, 0ms) backwards, ez-settle 1400ms var(--ease-out) var(--d, 0ms) backwards; }
+}
+@media (max-width: 1023px) {
+  html.motion.mo-ready .collage figure.is-in :is(img, canvas) { animation-duration: 700ms; }
+}
+
+/* ---------- 8 · Sobre mí y contacto ---------- */
+html.motion.mo-ready .rv-h:not(.is-in) .wm > span { transform: translateY(112%); }
+html.motion.mo-ready .rv-h.is-in .wm > span { animation: ez-rise-112 900ms var(--ease-expo) var(--d, 0ms) backwards; }
+
+/* Riel de pasos: la regla se dibuja y luego aparecen los nodos */
+html.motion .steps li { border-top-color: transparent; }
+html.motion .steps li::after { content: ""; position: absolute; left: 0; right: 0; top: -1px; height: 1px; background: var(--line-2); transform-origin: 0 50%; pointer-events: none; }
+html.motion.mo-ready .steps:not(.is-in) li::after { transform: scaleX(0); }
+html.motion.mo-ready .steps:not(.is-in) li::before { transform: scale(0); }
+html.motion.mo-ready .steps.is-in li::after { animation: ez-sx 900ms var(--ease-out) backwards; }
+html.motion.mo-ready .steps.is-in li::before { animation: ez-pop 200ms var(--ease-out) calc(600ms + var(--i, 0) * 120ms) backwards; }
+@media (max-width: 759px) {
+  html.motion .steps li { border-left-color: transparent; }
+  html.motion .steps li:last-child { border-left-color: transparent; }
+  html.motion .steps li::after { left: -1px; right: auto; top: 0; bottom: 0; width: 1px; height: auto; transform-origin: 50% 0; }
+  html.motion .steps li:last-child::after { content: none; }
+  html.motion.mo-ready .steps:not(.is-in) li::after { transform: scaleY(0); }
+  html.motion.mo-ready .steps.is-in li::after { animation: ez-sy 900ms var(--ease-out) calc(var(--i, 0) * 120ms) backwards; }
+}
+.steps li:nth-child(2) { --i: 1; } .steps li:nth-child(3) { --i: 2; } .steps li:nth-child(4) { --i: 3; } .steps li:nth-child(5) { --i: 4; }
+
+/* Industrias */
+html.motion.mo-ready .ind:not(.is-in) > li { opacity: 0; }
+html.motion.mo-ready .ind.is-in > li { animation: ez-up 600ms var(--ease-out) calc(var(--i, 0) * 60ms) backwards; }
+.ind > li:nth-child(2) { --i: 1; } .ind > li:nth-child(3) { --i: 2; } .ind > li:nth-child(4) { --i: 3; } .ind > li:nth-child(5) { --i: 4; } .ind > li:nth-child(6) { --i: 5; }
+
+@media (prefers-reduced-motion: reduce) {
+  html.motion *, html.motion *::before, html.motion *::after { animation: none !important; }
+}
