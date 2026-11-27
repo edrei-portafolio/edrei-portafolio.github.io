@@ -32,7 +32,7 @@ html.motion .manifesto-text.is-split:not(.is-go) .wm > span { transform: transla
 html.motion .manifesto-text.is-go .wm > span { animation: ez-rise-112 var(--t-hero) var(--ease-expo) var(--d, 0ms) backwards; }
 /* La cota bajo "verificada" se dibuja tras la última línea */
 html.motion .manifesto-text:not(.is-go) .cota-word::after { transform: scaleX(0); }
-html.motion .manifesto-text.is-go .cota-word::after { animation: ez-sx 700ms var(--ease-out) var(--cd, 900ms) backwards; }
+html.motion .manifesto-text.is-go:not(.is-done) .cota-word::after { animation: ez-sx 700ms var(--ease-out) var(--cd, 900ms) backwards; }
 
 /* ---------- 2 · Resto del manifiesto ---------- */
 html.motion .manifesto .label { animation: ez-fade 500ms ease 80ms backwards; }

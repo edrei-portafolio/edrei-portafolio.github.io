@@ -14,6 +14,10 @@ let view = 'wire';
 let tpView = 'thermal';
 let compact = false;
 
+/* Para motion.js: instancia de la Z (o null) y vista actual */
+export const getMark = () => mark;
+export const getView = () => view;
+
 /* ---------- Estado visual de la Z (lectura + 3D) ---------- */
 function setView(v, opts) {
   view = v;
