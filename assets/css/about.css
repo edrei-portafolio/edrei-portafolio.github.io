@@ -167,3 +167,7 @@
 @media (min-width: 1400px) {
   .person-table > div { grid-template-columns: calc((100% - 9 * var(--gutter)) / 5 + var(--gutter)) minmax(0, 1fr); }
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .f:not(fieldset)::after, .f label, .pick span { transition-duration: 0s; }
+}
