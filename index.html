@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="es">
+<!-- BEGIN PKG-0 -->
 <head>
 <meta charset="utf-8">
 <title>Edrei · Diseño 3D, simulación y fabricación</title>
@@ -25,7 +26,12 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Work+Sans:wght@300..700&family=Martian+Mono:wdth,wght@75..112.5,300..600&display=swap">
-<link rel="stylesheet" href="assets/css/styles.css">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/shell.css">
+<link rel="stylesheet" href="assets/css/cases.css">
+<link rel="stylesheet" href="assets/css/demo.css">
+<link rel="stylesheet" href="assets/css/about.css">
+<link rel="stylesheet" href="assets/css/motion.css">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -39,7 +45,9 @@
 }
 </script>
 </head>
+<!-- END PKG-0 -->
 <body>
+<!-- BEGIN PKG-0 -->
 <svg class="sprite" aria-hidden="true" focusable="false">
   <symbol id="logo-edrei" viewBox="0 0 406 100"><path fill="currentColor" fill-rule="evenodd" d="M9 0L80 0L80 22L22 22L22 39L72 39L72 61L22 61L22 78L80 78L80 100L9 100L0 91L0 9ZM105 0L152 0L176 24L176 76L152 100L105 100L96 91L96 9ZM118 22L143 22L154 33L154 67L143 78L118 78ZM201 0L262 0L272 10L272 48L262 58L272 68L272 100L250 100L250 74L244 68L214 68L214 100L192 100L192 9ZM214 22L250 22L250 46L214 46ZM297 0L368 0L368 22L310 22L310 39L360 39L360 61L310 61L310 78L368 78L368 100L297 100L288 91L288 9ZM384 0L406 0L406 100L384 100Z"/></symbol>
   <symbol id="i-z" viewBox="0 0 86 100"><path fill="currentColor" d="M9 0L86 0L86 22L0 22L0 9ZM81.2 27L69.6 39L37.6 39L49.2 27ZM64.8 44L53.2 56L21.2 56L32.8 44ZM48.4 61L36.8 73L4.8 73L16.4 61ZM0 78L86 78L86 91L77 100L0 100Z"/></symbol>
@@ -57,9 +65,11 @@
   <symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10.5" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M7.5 12.5l3 3 6-6.5" fill="none" stroke="currentColor" stroke-width="1.3"/></symbol>
   <symbol id="i-wa" viewBox="0 0 24 24"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M8.6 8.2c.3-.6.6-.7 1-.7h.6c.2 0 .4.1.5.4l.8 1.9c.1.3 0 .5-.1.7l-.6.7c-.1.2-.1.4 0 .6.6 1.1 1.5 2 2.6 2.6.2.1.4.1.6 0l.7-.6c.2-.2.5-.2.7-.1l1.9.8c.3.1.4.3.4.5v.6c0 .4-.1.7-.7 1-.6.4-1.4.6-2.2.4-1.6-.4-3-1.3-4.2-2.5S8.6 12 8.2 10.4c-.2-.8 0-1.6.4-2.2z" fill="currentColor"/></symbol>
 </svg>
+<!-- END PKG-0 -->
 
 <a class="skip" href="#contenido">Saltar al contenido</a>
 
+<!-- BEGIN PKG-A -->
 <!-- ============ BARRA LATERAL ============ -->
 <aside class="side" aria-label="Índice">
   <a class="side-logo" href="#manifiesto" aria-label="Edrei, ir al inicio"><svg aria-hidden="true"><use href="#logo-edrei"/></svg></a>
@@ -85,9 +95,11 @@
     <a href="#contacto" data-tab="contacto">Contacto</a>
   </nav>
 </header>
+<!-- END PKG-A -->
 
 <main id="contenido" class="content">
 
+  <!-- BEGIN PKG-A -->
   <!-- ============ MANIFIESTO ============ -->
   <section class="manifesto" id="manifiesto">
     <p class="label"><svg class="ic"><use href="#i-chip"/></svg> Manifiesto</p>
@@ -99,10 +111,12 @@
       </ul>
     </div>
   </section>
+  <!-- END PKG-A -->
 
   <!-- ============ SERVICIOS ============ -->
   <section class="services" id="servicios" aria-label="Servicios">
 
+    <!-- BEGIN PKG-B -->
     <!-- 01 · MODELA -->
     <article class="case" id="modela" data-case="modela">
       <div class="case-head">
@@ -185,6 +199,8 @@
       </div>
 
     </article>
+    <!-- END PKG-B -->
+    <!-- BEGIN PKG-C -->
     <!-- ============ PROYECTO DEMO ============ -->
     <section class="demo" id="demo" aria-labelledby="demo-titulo">
         <div class="demo-head">
@@ -219,8 +235,10 @@
         </dl>
         <p class="fineprint">Proyecto demostrativo con valores ilustrativos. Pronto, una selección de mis proyectos reales.</p>
       </section>
+    <!-- END PKG-C -->
   </section>
 
+  <!-- BEGIN PKG-D -->
   <!-- ============ SOBRE MÍ ============ -->
   <section class="team" id="sobre-mi">
     <ul class="chain chain-sm" aria-label="Perfil"><li>Freelance</li><li>Lima, Perú</li></ul>
@@ -313,11 +331,16 @@
       <p><a href="#manifiesto">Volver arriba</a></p>
     </footer>
   </section>
+  <!-- END PKG-D -->
 </main>
 
+<!-- BEGIN PKG-A -->
 <a class="cta-box" href="#contacto" data-cta><span>Cotiza tu proyecto</span><svg class="ic" aria-hidden="true"><use href="#i-corner"/></svg></a>
+<!-- END PKG-A -->
 
+<!-- BEGIN PKG-0 -->
 <script src="assets/js/config.js"></script>
 <script type="module" src="assets/js/main.js"></script>
+<!-- END PKG-0 -->
 </body>
 </html>

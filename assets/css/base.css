@@ -1,0 +1,89 @@
+/* =========================================================
+   Edrei · Portafolio
+   Layout: índice técnico. Barra lateral fija con el símbolo
+   dibujado en líneas y un índice numerado; a la derecha, una
+   columna de casos con títulos serif, tablas finas y collages.
+   ========================================================= */
+:root {
+  /* Color */
+  --ink: #0d0f12;          /* fondo (negro Platzi) */
+  --ink-2: #12151a;
+  --slate: #171c24;        /* fichas e imágenes */
+  --night: #0b1628;        /* azul noche (sobre mí) */
+  --night-2: #12223b;
+  --text: #ecf1ee;
+  --mist: #9ea8ae;
+  --dim: #808b94;
+  --line: rgba(236, 241, 238, 0.12);
+  --line-2: rgba(236, 241, 238, 0.26);
+  --green: #0ae98a;        /* verde Platzi: acento principal */
+  --green-2: #5df3b1;
+  --on-green: #03140b;
+  --cyan: #4cdcf7;
+  --orange: #ff7a3d;
+
+  /* Tipografía */
+  --f-display: "Instrument Serif", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --f-body: "Work Sans", "Helvetica Neue", Arial, sans-serif;
+  --f-mono: "Martian Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --fs-label: 0.6875rem;
+
+  /* Medidas */
+  --side: clamp(260px, 21vw, 330px);
+  --pad: clamp(20px, 3.2vw, 48px);
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+
+  color-scheme: dark;
+}
+
+/* ---------- Base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { background: var(--ink); scroll-behavior: smooth; scroll-padding-top: 72px; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--ink); color: var(--text);
+  font-family: var(--f-body); font-size: 1rem; line-height: 1.6;
+  overflow-x: hidden; overflow-x: clip;
+  -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 90; background: var(--ink); }
+img, svg { max-width: 100%; }
+img { display: block; height: auto; }
+a { color: inherit; }
+p { margin: 0; }
+h1, h2, h3 { margin: 0; font-weight: 400; text-wrap: balance; }
+ul, ol { margin: 0; padding: 0; list-style: none; }
+dl, dd { margin: 0; }
+em { font-style: italic; color: var(--green); }
+figure { margin: 0; }
+button, input, textarea { font: inherit; color: inherit; }
+::selection { background: var(--green); color: var(--on-green); }
+:focus-visible { outline: 2px solid var(--cyan); outline-offset: 3px; }
+.sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
+.ic { width: 1.2em; height: 1.2em; flex: none; vertical-align: -0.2em; }
+.skip { position: fixed; left: 16px; top: calc(env(safe-area-inset-top, 0px) + 10px); z-index: 200; padding: 10px 16px; background: var(--text); color: var(--ink); text-decoration: none; transform: translateY(-180%); transition: transform 0.2s; }
+.skip:focus { transform: none; }
+
+.label {
+  display: inline-flex; align-items: center; gap: 10px;
+  font: 500 var(--fs-label)/1.4 var(--f-body); letter-spacing: 0.08em; text-transform: uppercase; color: var(--text);
+}
+.label .ic { width: 22px; height: 22px; color: var(--mist); }
+
+.chain { display: flex; flex-wrap: wrap; align-items: center; row-gap: 10px; }
+.chain li { position: relative; display: inline-flex; align-items: center; min-height: 30px; padding: 0 12px; border: 1px solid var(--line-2); border-radius: 999px; font: 500 0.62rem/1 var(--f-body); letter-spacing: 0.1em; text-transform: uppercase; color: var(--text); }
+.chain li:first-child { border-radius: 2px; }
+.chain li + li { margin-left: 26px; }
+.chain li + li::before { content: ""; position: absolute; right: 100%; top: 50%; width: 27px; height: 1px; background: var(--line-2); }
+.chain li:last-child { border-color: var(--green); color: var(--green); }
+
+.case-table { display: grid; border-top: 1px solid var(--line); }
+.case-table div { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; padding: 9px 0; border-bottom: 1px solid var(--line); font: 500 0.68rem/1.4 var(--f-body); letter-spacing: 0.06em; text-transform: uppercase; }
+.case-table dt { color: var(--dim); }
+.case-table dd { color: var(--text); }
+
+/* ---------- Movimiento reducido ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; transition-delay: 0s !important; }
+  .collage figure.is-pending, .case-title.is-pending .ch { opacity: 1; transform: none; filter: none; }
+}
