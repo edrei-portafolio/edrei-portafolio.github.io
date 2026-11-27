@@ -154,3 +154,8 @@ html.motion.mo-ready .ind.is-in > li { animation: ez-up 600ms var(--ease-out) ca
 @media (prefers-reduced-motion: reduce) {
   html.motion *, html.motion *::before, html.motion *::after { animation: none !important; }
 }
+
+/* Plano de la Z en la ficha de Sobre mí: se traza una vez */
+html.motion.mo-ready .person-tile:not(.is-in) .zplan path { stroke-dasharray: 1; stroke-dashoffset: 1; }
+html.motion.mo-ready .person-tile.is-in .zplan path { stroke-dasharray: 1; animation: ez-draw 700ms var(--ease-in-out) calc(var(--i, 0) * 70ms) backwards; }
+.zplan path:nth-child(2) { --i: 1; } .zplan path:nth-child(3) { --i: 2; } .zplan path:nth-child(4) { --i: 3; } .zplan path:nth-child(5) { --i: 4; }

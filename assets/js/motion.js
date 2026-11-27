@@ -18,7 +18,7 @@ const motionOn = () => root.classList.contains('motion');
 /* Estado final inmediato (scroll inicial, hash, movimiento reducido o error) */
 function finalize() {
   root.classList.remove('motion', 'mo-ready');
-  $$('.rv, .rv-h, .tbl, .case-row, .steps, .ind, .collage figure').forEach((el) => el.classList.add('is-in'));
+  $$('.rv, .rv-h, .tbl, .case-row, .steps, .ind, .person-tile, .collage figure').forEach((el) => el.classList.add('is-in'));
   const h1 = $('.manifesto-text');
   if (h1) h1.classList.add('is-split', 'is-go');
   try { const m = getMark(); if (m) m.setState(getView(), { instant: true }); } catch (e) { /* sin Z */ }
@@ -139,7 +139,7 @@ function observeChapters({ heads, h2s, tbls }) {
   }, { rootMargin: RM });
   observeOnce($$('.case-row'), reveal, { rootMargin: RM });
   observeOnce(tbls, reveal, { rootMargin: RM });
-  observeOnce($$('.steps, .ind'), reveal, { rootMargin: RM });
+  observeOnce($$('.steps, .ind, .person-tile'), reveal, { rootMargin: RM });
 
   // Collages: por lote, de izquierda a derecha, tras decodificar
   const figs = $$('.collage figure');
