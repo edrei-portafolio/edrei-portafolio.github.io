@@ -10,10 +10,12 @@ Es un sitio estático (HTML, CSS y JavaScript sin compilación), listo para publ
 | Archivo o carpeta | Para qué sirve |
 |---|---|
 | `index.html` | La página completa: portada, servicios, comparativa, proceso, proyecto demo, aplicaciones, estudio, preguntas y contacto |
-| `assets/css/styles.css` | Todos los estilos (colores, tipografías, animaciones) |
+| `assets/css/base.css` | Colores, tipografías, espaciado y componentes compartidos |
+| `assets/css/shell.css`, `cases.css`, `demo.css`, `about.css`, `motion.css` | Estilos de cada sección: barra lateral y manifiesto, servicios, proyecto demo, sobre mí y contacto, movimiento |
 | `assets/js/config.js` | **Tus datos**: WhatsApp, correo, ciudad, nombre y redes |
-| `assets/js/main.js` | Animaciones, menú, formulario de cotización y comparador |
-| `assets/js/scene.js` | Modelo 3D animado de la portada (Three.js) |
+| `assets/js/main.js` | Punto de entrada: carga cada módulo |
+| `assets/js/core.js` | Utilidades compartidas (scroll, sección actual, configuración) |
+| `assets/js/shell.js`, `mark3d.js`, `cases.js`, `demo.js`, `contact.js`, `motion.js` | Índice y símbolo 3D, servicios, comparador, formulario de cotización y movimiento |
 | `assets/img/` | Renders 3D originales del sitio (WebP) |
 | `assets/brand/` | Logo en SVG, favicon, íconos e imagen para compartir en redes (`og-image.jpg`) |
 | `404.html` | Página de error con el estilo de la marca |
