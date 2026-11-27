@@ -36,11 +36,12 @@ function initForm() {
       return;
     }
     say('Abriendo WhatsApp con tu mensaje. Si no se abre, copia el mensaje y envíalo tú.');
+    document.dispatchEvent(new CustomEvent('ez:sent', { detail: { via: 'whatsapp' } }));
   });
   const copied = CFG.correo ? `Mensaje copiado. Pégalo en WhatsApp o envíalo a ${CFG.correo}.` : 'Mensaje copiado. Pégalo en WhatsApp o en un correo.';
   $('#copiar').addEventListener('click', async () => {
     const text = message();
-    try { await navigator.clipboard.writeText(text); say(copied); }
+    try { await navigator.clipboard.writeText(text); say(copied); document.dispatchEvent(new CustomEvent('ez:sent', { detail: { via: 'copy' } })); }
     catch {
       const ta = document.createElement('textarea');
       ta.value = text; ta.setAttribute('readonly', ''); ta.style.cssText = 'position:fixed;left:-9999px;top:0';
@@ -49,6 +50,7 @@ function initForm() {
       try { ok = document.execCommand('copy'); } catch { ok = false; }
       ta.remove();
       say(ok ? copied : 'No se pudo copiar automáticamente. Selecciona tu mensaje y cópialo.', !ok);
+      if (ok) document.dispatchEvent(new CustomEvent('ez:sent', { detail: { via: 'copy' } }));
     }
   });
   $$('[data-pick-level]').forEach((a) => a.addEventListener('click', () => {

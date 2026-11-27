@@ -1,10 +1,10 @@
 /* Proyecto demo (PKG-C) */
-import { $, $$, clamp, reducedMotion } from './core.js';
+import { $, $$, clamp, isReduced } from './core.js';
 
 /* ---------- Comparador de tres estados (proyecto demo) ---------- */
 const CALLOUTS = {
   design: [ { x: 19, y: 86, t: '140 × 90 × 12' }, { x: 22, y: 70, t: 'Ranura 11 × 22' }, { x: 24, y: 47, t: 'Nervio e = 10' } ],
-  sim: [ { x: 49, y: 74, t: 'σ máx. 148 MPa' }, { x: 50, y: 27, t: 'FS mín. 2.6' } ],
+  sim: [ { x: 49, y: 74, t: 'Esfuerzo máx. 148 MPa' }, { x: 50, y: 27, t: 'FS mín. 2.6' } ],
   fab: [ { x: 85, y: 24, t: 'Al 6061-T6' }, { x: 86, y: 47, t: 'CNC 3 ejes' }, { x: 84, y: 88, t: 'Anodizado' } ],
 };
 function initTriptych() {
@@ -58,7 +58,7 @@ function initTriptych() {
     if (host) host.innerHTML = items.map((c) => `<span class="callout callout-${layer}" style="left:${c.x}%;top:${c.y}%">${c.t}</span>`).join('');
   });
   apply();
-  if (!reducedMotion) {
+  if (!isReduced()) {
     const io = new IntersectionObserver(([en]) => {
       if (!en.isIntersecting) return;
       io.disconnect();

@@ -14,10 +14,10 @@
 .has-webgl .side-model .side-still { opacity: 0; }
 .side-model .side-still { object-fit: contain; transition: opacity 0.8s; }
 .side-index { display: grid; border-top: 1px solid var(--line-2); }
-.side-index a { position: relative; display: grid; grid-template-columns: 40px 1fr; align-items: center; min-height: 40px; padding: 8px 0; border-bottom: 1px solid var(--line-2); text-decoration: none; font: 500 0.72rem/1.3 var(--f-body); letter-spacing: 0.06em; text-transform: uppercase; color: var(--dim); transition: color 0.3s; }
+.side-index a { position: relative; display: grid; grid-template-columns: 40px 1fr; align-items: center; min-height: 40px; padding: 8px 0; border-bottom: 1px solid var(--line-2); text-decoration: none; font: 500 var(--t-label)/1.3 var(--f-body); letter-spacing: 0.06em; text-transform: uppercase; color: var(--dim); transition: color 0.3s; }
 .side-index .idx-head { color: var(--text); grid-template-columns: 40px 1fr; }
 .side-index .idx-head .ic { width: 16px; height: 16px; }
-.side-index .idx span { font-family: var(--f-mono); font-size: 0.66rem; letter-spacing: 0; }
+.side-index .idx span { font-family: var(--f-mono); font-size: var(--t-label); letter-spacing: 0; }
 .side-index .idx.is-active, .side-index .idx:hover { color: var(--text); }
 .side-index .idx i { position: absolute; left: 0; bottom: -1px; height: 1px; width: 100%; background: var(--green); transform-origin: 0 50%; transform: scaleX(var(--p, 0)); }
 .side-index .idx.is-active span { color: var(--green); }
@@ -33,14 +33,14 @@
 .tabs-logo { color: var(--text); flex: none; }
 .tabs-logo svg { width: 96px; height: 24px; display: block; }
 .tabs { display: flex; border: 1px solid var(--line-2); }
-.tabs a { padding: 8px 10px; text-decoration: none; font: 500 0.62rem/1 var(--f-body); letter-spacing: 0.08em; text-transform: uppercase; color: var(--mist); border-right: 1px solid var(--line-2); white-space: nowrap; transition: background-color 0.25s, color 0.25s; }
+.tabs a { padding: 8px 10px; text-decoration: none; font: 500 var(--t-label)/1 var(--f-body); letter-spacing: 0.04em; text-transform: uppercase; color: var(--mist); border-right: 1px solid var(--line-2); white-space: nowrap; transition: background-color 0.25s, color 0.25s; }
 .tabs a:last-child { border-right: 0; }
 .tabs a:hover { color: var(--text); }
 .tabs a.is-active { background: var(--text); color: var(--ink); }
 .tab-demo { display: none; }
 @media (min-width: 600px) { .tab-demo { display: block; } }
 @media (max-width: 1023px) {
-  .tabs a { display: flex; align-items: center; min-height: 40px; padding: 0 10px; font-size: 0.68rem; }
+  .tabs a { display: flex; align-items: center; min-height: 40px; padding: 0 10px; font-size: var(--t-label); }
   .side { flex-direction: row; flex-wrap: wrap; align-items: center; gap: 16px 20px; padding-top: calc(80px + env(safe-area-inset-top, 0px)); padding-bottom: 20px; }
   .side-model { width: 128px; margin: 0; flex: none; }
   .side-index { flex: 1 1 200px; }
@@ -52,7 +52,7 @@
   .chain li + li { margin-left: 0 !important; }
   .chain li + li::before { display: none; }
   .tabs-logo svg { width: 78px; height: 19px; }
-  .tabs a { padding: 0 8px; font-size: 0.62rem; letter-spacing: 0.04em; }
+  .tabs a { padding: 0 8px; font-size: var(--t-label); letter-spacing: 0.02em; }
   .chain li + li { margin-left: 14px; }
   .chain li + li::before { width: 15px; }
   .side-model { width: 104px; }
@@ -60,14 +60,10 @@
 
 /* ---------- Contenido ---------- */
 .content { position: relative; }
-.manifesto, .services, .team, .contact { padding-left: max(var(--pad), env(safe-area-inset-left, 0px)); padding-right: max(var(--pad), env(safe-area-inset-right, 0px)); }
 
 /* Manifiesto */
 .manifesto { display: grid; gap: 32px; padding-top: 48px; padding-bottom: 56px; border-bottom: 1px solid var(--line); }
-.manifesto-text { font-family: var(--f-display); font-size: clamp(2.3rem, 1rem + 4.2vw, 4.7rem); line-height: 1.02; letter-spacing: -0.012em; max-width: 19ch; }
-.manifesto-text .w { display: inline-block; transition: filter 0.35s linear, opacity 0.35s linear; }
 .manifesto-foot { display: flex; flex-direction: column; align-items: flex-start; gap: 24px; }
-.manifesto-who { max-width: 44ch; color: var(--mist); font-size: 0.95rem; }
 
 /* ---------- Bloque fijo de cotización ---------- */
 .cta-box {
@@ -93,10 +89,9 @@
   .tabs-bar { left: var(--side); justify-content: flex-end; padding-top: calc(18px + env(safe-area-inset-top, 0px)); background: transparent; -webkit-backdrop-filter: none; backdrop-filter: none; border-bottom: 0; pointer-events: none; }
   .tabs-bar .tabs { pointer-events: auto; background: var(--ink); }
   .tabs-logo { display: none; }
-  .tabs a { padding: 9px 12px; font-size: 0.66rem; }
+  .tabs a { padding: 9px 12px; font-size: var(--t-label); }
   .tab-demo { display: block; }
   .content { margin-left: var(--side); }
-  .manifesto { min-height: 100vh; grid-template-rows: auto 1fr auto; padding-top: 22px; }
-  .case-row, .person { padding-right: 200px; }
+  .manifesto { min-height: 100vh; grid-template-rows: auto 1fr auto; padding-top: 24px; padding-bottom: 24px; }
   .cta-box { width: 220px; height: 76px; padding: 14px 16px; font-size: 1rem; }
 }

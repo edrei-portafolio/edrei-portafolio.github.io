@@ -1,22 +1,21 @@
 /* Proyecto demo (PKG-C) */
 /* Proyecto demo */
-.demo { padding-top: clamp(80px, 10vw, 140px); padding-bottom: 24px; display: grid; gap: 24px; }
-.demo-title { font-family: var(--f-display); font-size: clamp(2.4rem, 1.4rem + 3vw, 4rem); line-height: 1; margin-bottom: 14px; }
+.demo { padding-top: var(--section); padding-bottom: 24px; display: grid; gap: 24px; }
+.demo-title { margin-bottom: 14px; }
 .demo-head { display: grid; gap: 18px; padding-top: 28px; border-top: 1px solid var(--line); }
 @media (min-width: 760px) { .demo-head { grid-template-columns: 260px minmax(0, 1fr); align-items: start; } }
-.demo-lead { color: var(--mist); max-width: 56ch; font-size: 0.95rem; }
 .triptych { --a: 33.333%; --b: 66.667%; position: relative; width: 100%; max-width: 100%; aspect-ratio: 16 / 10; overflow: hidden; isolation: isolate; background: #0a1730; border: 1px solid var(--line-2); user-select: none; -webkit-user-select: none; touch-action: pan-y; }
 .tp-layer { position: absolute; inset: 0; }
 .tp-layer img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
 .tp-design { background-color: #0a1730; background-image: linear-gradient(rgba(76, 220, 247, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(76, 220, 247, 0.1) 1px, transparent 1px); background-size: 40px 40px; }
 .tp-sim { background: radial-gradient(ellipse 70% 70% at 50% 50%, #151b26, #0b0e14 80%); clip-path: inset(0 0 0 var(--a)); }
 .tp-fab { background: radial-gradient(ellipse 70% 60% at 50% 40%, #222a37, #0b0d12 85%); clip-path: inset(0 0 0 var(--b)); }
-.tp-label { position: absolute; top: 12px; padding: 6px 9px; background: rgba(13, 15, 18, 0.8); border: 1px solid var(--line-2); font: 500 0.6rem/1 var(--f-body); letter-spacing: 0.1em; text-transform: uppercase; white-space: nowrap; }
+.tp-label { position: absolute; top: 12px; padding: 6px 9px; background: rgba(13, 15, 18, 0.8); border: 1px solid var(--line-2); font: 400 var(--t-label)/1 var(--f-mono); letter-spacing: 0.04em; text-transform: uppercase; white-space: nowrap; }
 .tp-design .tp-label { left: 12px; }
 .tp-sim .tp-label { left: calc(var(--a) + 12px); }
 .tp-fab .tp-label { left: calc(var(--b) + 12px); }
 .callouts { position: absolute; top: 0; bottom: 0; left: 50%; height: 100%; aspect-ratio: 16 / 10; transform: translateX(-50%); pointer-events: none; }
-.callout { position: absolute; transform: translate(-50%, -50%); padding: 4px 8px; font: 500 clamp(0.5rem, 0.4rem + 0.3vw, 0.66rem)/1.2 var(--f-mono); white-space: nowrap; color: var(--cyan); background: rgba(10, 23, 48, 0.88); border: 1px solid rgba(76, 220, 247, 0.4); }
+.callout { position: absolute; transform: translate(-50%, -50%); padding: 4px 8px; font: 400 var(--t-label)/1.2 var(--f-mono); white-space: nowrap; color: var(--cyan); background: rgba(10, 23, 48, 0.88); border: 1px solid rgba(76, 220, 247, 0.4); }
 .callout-sim { color: #fff; background: rgba(13, 15, 18, 0.88); border-color: rgba(250, 68, 25, 0.7); }
 .callout-fab { color: var(--text); background: rgba(13, 15, 18, 0.85); border-color: var(--line-2); }
 .tp-handle { position: absolute; top: 0; bottom: 0; width: 44px; margin-left: -22px; padding: 0; background: none; border: 0; cursor: ew-resize; z-index: 3; touch-action: none; }
@@ -30,9 +29,9 @@
 .tp-handle:focus-visible { outline: none; }
 .tp-handle:focus-visible span { background: var(--green); }
 .demo-table { max-width: 640px; }
-.fineprint { font: 400 0.625rem/1.5 var(--f-mono); color: var(--dim); }
+.fineprint { font: 400 var(--t-label)/1.5 var(--f-mono); color: var(--dim); }
 @media (max-width: 640px) {
   .triptych { aspect-ratio: 4 / 3; }
   .callouts { display: none; }
-  .tp-label { font-size: 0.55rem; padding: 5px 6px; }
+  .tp-label { padding: 5px 6px; }
 }

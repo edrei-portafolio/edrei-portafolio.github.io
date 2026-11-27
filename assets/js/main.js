@@ -7,8 +7,8 @@ import * as contact from './contact.js';
 import * as motion from './motion.js';
 
 const root = document.documentElement;
-root.classList.add('js');
 if (!root.lang) root.lang = 'es';
 
 applyConfig();
-[motion, demo, contact, cases, shell].forEach((m) => m.init());
+// Un módulo que falle no detiene a los demás
+[shell, cases, demo, contact, motion].forEach((m) => { try { m.init(); } catch (err) { console.error(err); } });

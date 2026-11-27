@@ -1,58 +1,64 @@
 /* Shell: índice, pestañas, bloque fijo y símbolo 3D (PKG-A) */
-import { $, $$, clamp, reducedMotion } from './core.js';
+import { $, $$, clamp, isReduced, onFrame, onMeasure, spy } from './core.js';
 
 const root = document.documentElement;
+const TAB_OF = { modela: 'servicios', valida: 'servicios', materializa: 'servicios', demo: 'demo', 'sobre-mi': 'sobre-mi', contacto: 'contacto' };
 
-/* ---------- Índice lateral, pestañas y bloque fijo ---------- */
-function initScroll() {
-  const cases = $$('[data-case]');
-  const idx = new Map($$('[data-idx]').map((a) => [a.dataset.idx, a]));
+/* Índice lateral: caso activo y progreso --p, con offsets cacheados */
+function initIndex() {
+  const cases = $$('[data-case]').map((el) => ({ el, a: $(`[data-idx="${el.dataset.case}"]`), top: 0, h: 1, p: '', on: null }));
+  onMeasure(() => {
+    const y = scrollY;
+    cases.forEach((c) => { const r = c.el.getBoundingClientRect(); c.top = r.top + y; c.h = r.height || 1; });
+  });
+  onFrame((y, vh) => {
+    const mid = y + vh * 0.5;
+    cases.forEach((c) => {
+      if (!c.a) return;
+      const inside = mid >= c.top && mid < c.top + c.h;
+      const p = inside ? clamp((mid - c.top) / c.h, 0, 1).toFixed(3) : '0';
+      if (p !== c.p) { c.p = p; c.a.style.setProperty('--p', p); }
+      if (inside !== c.on) { c.on = inside; c.a.classList.toggle('is-active', inside); }
+    });
+  });
+}
+
+/* Pestañas desde html[data-section] */
+function initTabs() {
   const tabs = $$('[data-tab]');
-  const sections = tabs.map((t) => document.getElementById(t.dataset.tab)).filter(Boolean);
+  const set = (id) => { const t = TAB_OF[id] || ''; tabs.forEach((a) => a.classList.toggle('is-active', a.dataset.tab === t)); };
+  document.addEventListener('ez:section', (e) => set(e.detail.id));
+  set(root.dataset.section);
+}
+
+/* Bloque de cotización oculto mientras el contacto está a la vista */
+function initCta() {
   const cta = $('[data-cta]');
   const contact = $('#contacto');
-  let mark = null;
-  const cache = new Map();
-  const write = (k, v, fn) => { if (cache.get(k) !== v) { cache.set(k, v); fn(v); } };
+  if (!cta || !contact || !('IntersectionObserver' in window)) return;
+  new IntersectionObserver(([en]) => {
+    const v = en.isIntersecting || en.boundingClientRect.top < 0;
+    cta.classList.toggle('is-hidden', v);
+    cta.toggleAttribute('inert', v);
+    if (v) cta.setAttribute('tabindex', '-1'); else cta.removeAttribute('tabindex');
+  }, { rootMargin: '0px 0px -15% 0px' }).observe(contact);
+}
 
-  const frame = (now) => {
-    const vh = innerHeight;
-    const mid = vh * 0.5;
-    // Caso activo y su progreso
-    cases.forEach((c) => {
-      const r = c.getBoundingClientRect();
-      const p = clamp((mid - r.top) / r.height, 0, 1);
-      const inside = r.top <= mid && r.bottom > mid;
-      const a = idx.get(c.dataset.case);
-      if (!a) return;
-      write('p' + c.id, inside ? p.toFixed(3) : '0', (v) => a.style.setProperty('--p', v));
-      write('a' + c.id, inside, (v) => a.classList.toggle('is-active', v));
-    });
-    // Pestaña activa
-    let current = '';
-    sections.forEach((s) => { const r = s.getBoundingClientRect(); if (r.top <= vh * 0.4 && r.bottom > vh * 0.4) current = s.id; });
-    write('tab', current, (v) => tabs.forEach((t) => t.classList.toggle('is-active', t.dataset.tab === v)));
-    // El bloque de cotización se oculta en el contacto
-    const cr = contact.getBoundingClientRect();
-    write('cta', cr.top < vh * 0.85, (v) => { cta.classList.toggle('is-hidden', v); cta.toggleAttribute('inert', v); if (v) cta.setAttribute('tabindex', '-1'); else cta.removeAttribute('tabindex'); });
-    // Giro del símbolo según el avance de la página
-    const docH = document.documentElement.scrollHeight - vh;
-    if (mark) mark.setProgress(docH > 0 ? scrollY / docH : 0);
-    requestAnimationFrame(frame);
-  };
-  requestAnimationFrame(frame);
-
-  // Símbolo 3D en líneas (si hay WebGL)
+/* Símbolo 3D en líneas (si hay WebGL) */
+function initMark() {
   const canvas = $('#marca3d');
+  if (!canvas) return;
   const boot = async () => {
     try {
       const probe = document.createElement('canvas');
       if (!(probe.getContext('webgl2') || probe.getContext('webgl'))) throw new Error('Sin WebGL');
       const mod = await import('./mark3d.js');
-      mark = mod.createMark(canvas, { reduced: reducedMotion });
-      const size = () => mark.resize();
-      addEventListener('resize', size);
+      const mark = mod.createMark(canvas, { reduced: isReduced() });
+      addEventListener('resize', () => mark.resize(), { passive: true });
       new IntersectionObserver(([en]) => { if (en.isIntersecting) mark.start(); else mark.stop(); }).observe(canvas);
+      let docH = 1;
+      onMeasure(() => { docH = Math.max(1, root.scrollHeight - innerHeight); });
+      onFrame((y) => mark.setProgress(y / docH));
       mark.renderOnce();
       root.classList.add('has-webgl');
     } catch (err) {
@@ -62,4 +68,10 @@ function initScroll() {
   if ('requestIdleCallback' in window) requestIdleCallback(boot, { timeout: 1200 }); else setTimeout(boot, 200);
 }
 
-export function init() { initScroll(); }
+export function init() {
+  spy();
+  initIndex();
+  initTabs();
+  initCta();
+  initMark();
+}

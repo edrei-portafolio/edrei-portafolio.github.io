@@ -1,23 +1,21 @@
 /* Sobre mí, contacto, formulario y pie (PKG-D) */
 /* ---------- Sobre mí (bloque azul noche) ---------- */
-.team { background: var(--night); padding-top: clamp(80px, 10vw, 140px); padding-bottom: clamp(60px, 8vw, 110px); margin-top: clamp(60px, 8vw, 110px); --line: rgba(236, 241, 238, 0.14); }
-.team-title, .contact-title { font-family: var(--f-display); font-size: clamp(2.3rem, 1rem + 4vw, 4.6rem); line-height: 1.02; letter-spacing: -0.012em; max-width: 18ch; margin-top: 28px; padding-bottom: 56px; border-bottom: 1px solid var(--line); }
+.team { background: var(--night); padding-top: var(--section); padding-bottom: clamp(60px, 8vw, 110px); margin-top: clamp(60px, 8vw, 110px); --line: rgba(236, 241, 238, 0.14); }
+.team-title, .contact-title { margin-top: 28px; padding-bottom: 56px; border-bottom: 1px solid var(--line); }
 .person { display: grid; grid-template-columns: minmax(0, 1fr); gap: 20px; padding-block: 40px; border-bottom: 1px solid var(--line); }
 .person:last-child { border-bottom: 0; }
-.person-meta { font: 500 var(--fs-label)/1.6 var(--f-body); letter-spacing: 0.06em; text-transform: uppercase; color: var(--text); }
 .person-meta a { color: var(--dim); }
 .person-photo { position: relative; display: grid; place-items: center; width: 120px; height: 120px; background: linear-gradient(160deg, var(--night-2), var(--ink)); }
 .person-photo svg { width: 46px; height: 54px; color: var(--green); }
-.person-photo span { position: absolute; left: 8px; bottom: 6px; font: 400 0.55rem/1 var(--f-mono); color: var(--dim); text-transform: uppercase; }
+.person-photo span { position: absolute; left: 8px; bottom: 6px; font: 400 var(--t-label)/1 var(--f-mono); color: var(--dim); text-transform: uppercase; }
 .person-icon svg { width: 48px; height: 48px; color: var(--mist); }
 .person-copy { display: grid; gap: 24px; min-width: 0; }
-.person-copy > p { color: var(--mist); max-width: 60ch; font-size: 0.95rem; }
 .person-copy strong { color: var(--text); font-weight: 600; }
 .steps-table dt { color: var(--text); }
 @media (min-width: 900px) { .person { grid-template-columns: 180px 120px minmax(0, 1fr); gap: 32px; } }
 
 /* ---------- Contacto ---------- */
-.contact { padding-top: clamp(80px, 10vw, 140px); padding-bottom: 40px; }
+.contact { padding-top: var(--section); padding-bottom: 40px; }
 .form { display: grid; grid-template-columns: minmax(0, 1fr); gap: 28px 32px; padding-top: 48px; max-width: 860px; margin-left: auto; }
 @media (min-width: 640px) { .form { grid-template-columns: repeat(2, minmax(0, 1fr)); } .f { grid-column: 1 / -1; } .f-half { grid-column: auto; } }
 .f { display: grid; gap: 6px; border: 0; padding: 0; margin: 0; min-width: 0; }
@@ -31,18 +29,18 @@
 .pick { display: flex; flex-wrap: wrap; gap: 8px; }
 .pick label { position: relative; cursor: pointer; font: inherit; text-transform: none; letter-spacing: 0; }
 .pick input { position: absolute; opacity: 0; width: 1px; height: 1px; }
-.pick span { display: inline-flex; align-items: center; min-height: 40px; padding: 0 14px; border: 1px solid var(--line-2); border-radius: 999px; font: 500 0.66rem/1 var(--f-body); letter-spacing: 0.08em; text-transform: uppercase; color: var(--mist); transition: background-color 0.2s, color 0.2s, border-color 0.2s; }
+.pick span { display: inline-flex; align-items: center; min-height: 40px; padding: 0 14px; border: 1px solid var(--line-2); border-radius: 999px; font: 500 var(--t-label)/1 var(--f-body); letter-spacing: 0.04em; text-transform: uppercase; color: var(--mist); transition: background-color 0.2s, color 0.2s, border-color 0.2s; }
 .pick input:checked + span { background: var(--text); color: var(--ink); border-color: var(--text); }
 .pick input:focus-visible + span { outline: 2px solid var(--cyan); outline-offset: 2px; }
 .form-actions { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: flex-end; gap: 16px; }
 .send { position: relative; display: flex; align-items: flex-end; justify-content: space-between; width: min(100%, 280px); min-height: 88px; padding: 16px 18px; background: var(--green); color: var(--on-green); text-decoration: none; font-size: 1.05rem; font-weight: 500; transition: background-color 0.25s; }
 .send:hover { background: var(--green-2); }
 .send .ic { position: absolute; right: 14px; top: 14px; width: 22px; height: 22px; }
-.copy { min-height: 48px; padding: 0 18px; background: transparent; border: 1px solid var(--line-2); cursor: pointer; font: 500 0.66rem/1 var(--f-body); letter-spacing: 0.1em; text-transform: uppercase; color: var(--text); }
+.copy { min-height: 48px; padding: 0 18px; background: transparent; border: 1px solid var(--line-2); cursor: pointer; font: 500 var(--t-label)/1 var(--f-body); letter-spacing: 0.04em; text-transform: uppercase; color: var(--text); }
 .copy:hover { border-color: var(--text); }
 .form-status { grid-column: 1 / -1; min-height: 1.4em; text-align: right; font-size: 0.9rem; color: var(--green); }
 .form-status.is-error { color: var(--orange); }
 .direct { grid-column: 1 / -1; text-align: right; color: var(--mist); font-size: 0.9rem; }
 .direct span { color: var(--text); user-select: all; -webkit-user-select: all; }
-.foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; margin-top: 90px; padding-top: 18px; border-top: 1px solid var(--line); font: 400 0.625rem/1.4 var(--f-mono); color: var(--dim); }
+.foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; margin-top: 90px; padding-top: 18px; border-top: 1px solid var(--line); font: 400 var(--t-label)/1.4 var(--f-mono); color: var(--dim); }
 .foot a { color: var(--mist); }

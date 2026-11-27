@@ -1,11 +1,7 @@
 /* Casos y collages (PKG-B) */
 /* Casos */
-.case { padding-top: clamp(80px, 10vw, 140px); }
+.case { padding-top: var(--section); }
 .case-head { display: grid; gap: 28px; padding-bottom: 36px; border-bottom: 1px solid var(--line); }
-.case-meta { font: 500 var(--fs-label)/1.6 var(--f-body); letter-spacing: 0.06em; text-transform: uppercase; color: var(--dim); }
-.case-title { font-family: var(--f-display); font-size: clamp(3.6rem, 1rem + 9vw, 9rem); line-height: 0.86; letter-spacing: -0.02em; }
-.case-title .ch { display: inline-block; transition: filter 0.9s var(--ease), opacity 0.9s var(--ease), transform 0.9s var(--ease); transition-delay: calc(var(--i) * 40ms); }
-.case-title.is-pending .ch { filter: blur(12px); opacity: 0.15; transform: translateY(0.1em); }
 .case-row { display: grid; grid-template-columns: minmax(0, 1fr); gap: 24px; padding-top: 24px; }
 .case-icons { display: flex; gap: 8px; }
 .case-icons svg { width: 26px; height: 26px; color: var(--mist); }
@@ -15,7 +11,6 @@
 .tile-y span { color: var(--green); }
 .tile-z span { color: var(--orange); }
 .case-copy { display: grid; gap: 28px; min-width: 0; }
-.case-copy > p { max-width: 58ch; color: var(--mist); font-size: 0.95rem; }
 .case-copy > p a { color: var(--text); font-weight: 600; text-decoration-color: var(--green); text-underline-offset: 3px; }
 
 /* Collages */
@@ -37,8 +32,6 @@
 .collage-b .c4 { grid-column: 1 / -1; aspect-ratio: 5 / 4; max-width: 440px; justify-self: end; }
 .collage-c .c1 { aspect-ratio: 1600 / 733; }
 .collage-c .c2, .collage-c .c3 { aspect-ratio: 5 / 4; }
-.collage figure.reveal { transition: opacity 1s var(--ease), transform 1s var(--ease); }
-.collage figure.is-pending { opacity: 0.2; transform: translateY(40px); }
 
 @media (min-width: 760px) {
   .case-row { grid-template-columns: 140px 120px minmax(0, 1fr); }
