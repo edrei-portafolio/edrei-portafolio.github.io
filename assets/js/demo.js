@@ -117,6 +117,17 @@ function initTriptych() {
     raf = 0;
     if (!settled) { settled = true; box.classList.remove('is-sweeping'); write(); }
   };
+  // Para motion.js: si el usuario activa movimiento reducido, reposo inmediato en 42/60
+  sweepStop = () => {
+    if (settled) return;
+    if (raf) cancelAnimationFrame(raf);
+    raf = 0;
+    pos[0] = REST[0]; pos[1] = REST[1];
+    settled = true;
+    box.classList.remove('is-sweeping');
+    apply();
+    write();
+  };
   if (motion) {
     const io = new IntersectionObserver(([en]) => {
       if (!en.isIntersecting) return;
@@ -179,4 +190,6 @@ function initTriptych() {
   apply();
 }
 
+let sweepStop = null;
+export function stopSweep() { if (sweepStop) sweepStop(); }
 export function init() { initTriptych(); }

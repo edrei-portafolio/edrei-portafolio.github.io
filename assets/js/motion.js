@@ -5,6 +5,7 @@
    - Sin bucles: solo IntersectionObserver y animaciones CSS que terminan solas. */
 import { $, $$, rmq, observeOnce } from './core.js';
 import { getMark, getView } from './shell.js';
+import { stopSweep } from './demo.js';
 
 const root = document.documentElement;
 const wait = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -21,6 +22,10 @@ function finalize() {
   const h1 = $('.manifesto-text');
   if (h1) h1.classList.add('is-split', 'is-go');
   try { const m = getMark(); if (m) m.setState(getView(), { instant: true }); } catch (e) { /* sin Z */ }
+}
+function toReduced() {
+  finalize();
+  try { stopSweep(); } catch (e) { /* sin demo */ }
 }
 
 /* ---------- Palabras en máscara (sin partir letras) ---------- */
@@ -155,7 +160,7 @@ function observeChapters({ heads, h2s, tbls }) {
 }
 
 export function init() {
-  rmq.addEventListener('change', () => { if (rmq.matches) finalize(); });
+  rmq.addEventListener('change', () => { if (rmq.matches) toReduced(); });
   if (!motionOn()) return;
   if (location.hash || scrollY > innerHeight * 0.5 || performance.now() > LATE_MS + 2000) { finalize(); return; }
   try {
