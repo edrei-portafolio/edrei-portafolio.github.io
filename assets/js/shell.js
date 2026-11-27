@@ -7,6 +7,7 @@ const LEVELS = ['modela', 'valida', 'materializa'];
 const VIEW_OF = { modela: 'wire', manifiesto: 'wire', valida: 'thermal', materializa: 'solid', 'sobre-mi': 'solid', contacto: 'solid', demo: 'thermal' };
 const VIEW_TXT = { wire: 'Alámbrica', thermal: 'Térmica', solid: 'Sólida' };
 const TP_VIEW = { design: 'wire', sim: 'thermal', fab: 'solid' };
+const PLAN_DRAW_MS = 1250;
 
 let mark = null;
 let view = 'wire';
@@ -172,8 +173,13 @@ function initMark() {
     onMeasure(() => mark.resize());
     // Intro: plano 2D → extrusión, solo en la primera pantalla y con movimiento
     const play = root.classList.contains('motion') && scrollY < innerHeight * 0.5 && !compact;
-    if (play) mark.intro(); else mark.renderOnce();
-    requestAnimationFrame(() => root.classList.add('has-webgl'));
+    if (!play) { mark.renderOnce(); requestAnimationFrame(() => root.classList.add('has-webgl')); return; }
+    // Espera a que el plóter termine el plano (150 + 4×90 + 700 ms) y luego extruye
+    setTimeout(() => {
+      if (compact) { mark.setScale(0.5); root.classList.add('has-webgl'); return; }
+      mark.intro();
+      requestAnimationFrame(() => root.classList.add('has-webgl'));
+    }, Math.max(0, PLAN_DRAW_MS - performance.now()));
   }).catch(() => root.classList.add('no-webgl'));
 }
 

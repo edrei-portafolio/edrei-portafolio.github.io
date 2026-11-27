@@ -11,6 +11,9 @@
 .side-model { position: relative; width: 72px; aspect-ratio: 9 / 11; flex: none; margin-left: auto; pointer-events: none; }
 .side-plan { position: absolute; inset: 0; width: 100%; height: 100%; fill: none; stroke: var(--text); stroke-opacity: .92; stroke-width: 1.5; stroke-linejoin: miter; overflow: visible; transform-origin: 50% 50%; }
 .side-plan .acc { stroke: var(--green); stroke-opacity: 1; }
+/* Trazado de plóter al cargar (solo con movimiento): el plano se dibuja y luego se extruye en 3D */
+html.motion .side-plan path { stroke-dasharray: 1 1; stroke-dashoffset: 1; animation: plan-draw 700ms var(--ease-in-out) calc(150ms + var(--i, 0) * 90ms) forwards; }
+@keyframes plan-draw { to { stroke-dashoffset: 0; } }
 .side-still, .side-model canvas { display: none; position: absolute; inset: 0; width: 100%; height: 100%; }
 .side-index, .side-foot { display: none; }
 
@@ -91,9 +94,9 @@ html[data-section="modela"] .lvl-strip, html[data-section="valida"] .lvl-strip, 
   .manifesto-text { align-self: start; }
 }
 @media (max-width: 400px) {
-  .manifesto .chain li { padding: 0 10px; }
-  .manifesto .chain li + li { margin-left: 16px; }
-  .manifesto .chain li + li::before { width: 17px; }
+  .manifesto .chain li { padding: 0 10px; letter-spacing: .02em; }
+  .manifesto .chain li + li { margin-left: 14px; }
+  .manifesto .chain li + li::before { width: 15px; }
 }
 
 /* ---------- Bloque CTA ---------- */
@@ -126,7 +129,8 @@ html[data-section="modela"] .lvl-strip, html[data-section="valida"] .lvl-strip, 
   .side-logo svg { width: 140px; height: 34px; }
   .side-model { width: min(100%, 240px); margin: auto; flex: none; transition: transform 700ms var(--ease-in-out); }
   .side-plan { transition: transform 700ms var(--ease-in-out), opacity 150ms linear; }
-  .side-model canvas { display: block; }
+  .side-model canvas { display: block; opacity: 0; }
+  .has-webgl .side-model canvas { opacity: 1; }
   .has-webgl .side-plan { opacity: 0; }
   .no-webgl .side-model canvas { display: none; }
   .side-index { display: grid; flex: none; border-top: 1px solid var(--line-2); transition: transform 700ms var(--ease-in-out); }
